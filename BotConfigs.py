@@ -6,6 +6,7 @@ class BotStates(StatesGroup):
     FIRST_LANGUAGE_SWITCH = State()
     LANGUAGE_SWITCH = State()
     SELECTING_NAME = State()
+    FIRST_WORKER = State()
 
 ### data base
 

@@ -4,11 +4,16 @@ from aiogram.utils import executor
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
+from sqlalchemy import create_engine
 
 from handlers import greeting
 
-from BotConfigs import TOKEN
-from BotDataBase import *
+from BotConfigs import USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE_NAME, TOKEN
+import BotDataBase
+import BotLocalization
+
+
+BotDataBase.Connect()
 
 bot = Bot(token=TOKEN, parse_mode="HTML")
 #storage = RedisStorage2('localhost', 6379, db=5, pool_size=10, prefix='gay')
