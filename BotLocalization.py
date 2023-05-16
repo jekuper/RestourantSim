@@ -3,6 +3,20 @@ from aiogram.types import InlineKeyboardMarkup
 from aiogram.types import Message
 
 LOCALIZATIONS = ["ru", "en"]
+COMMANDS = {
+    "start" : {
+        "ru" : "старт",
+        "en" : "start",
+    },
+    "language" : {
+        "ru" : "язык",
+        "en" : "language",
+    },
+    "employment" : {
+        "ru" : "нанять",
+        "en" : "employ",
+    },
+}
 PHRASES = {
     "languageChange" : {
         "ru" : "Язык успешно изменён на Русский",
@@ -21,18 +35,8 @@ PHRASES = {
         "en" : "Name must include only latin characters and numbers",
     },
     "nameSet" :{
-        "ru" : "Имя успешно установлено",
-        "en" : "Name set successfully",
-    },
-}
-COMMANDS = {
-    "start" : {
-        "ru" : "старт",
-        "en" : "start",
-    },
-    "language" : {
-        "ru" : "язык",
-        "en" : "language",
+        "ru" : "Имя успешно установлено\nТеперь тебе нужно нанять свой первый персонал!\n\nОткрыть рынок рабочих - "+COMMANDS["employment"],
+        "en" : "Name set successfully/\nNow you need to hire new employees!",
     },
 }
 
