@@ -6,14 +6,15 @@ import BotDataBase
 from aiogram.dispatcher import FSMContext
 import handlers.common as common
 
-def register_handlers_greeting(dpG: Dispatcher):
+def register_handlers(dpG: Dispatcher):
     dpG.register_message_handler(process_start, lambda msg: BotLocalization.check_command_localization("start", msg) is not None, state=None)
     dpG.register_message_handler(process_language_switch, lambda msg: BotLocalization.check_command_localization("language", msg) is not None, state=None)
     dpG.register_message_handler(process_restaurant_name, state=BotStates.SELECTING_NAME)
 
     dpG.register_callback_query_handler(process_callback_localization, text=BotLocalization.LOCALIZATIONS, state=[BotStates.LANGUAGE_SWITCH, BotStates.FIRST_LANGUAGE_SWITCH])
 
-    common.dp = dpG
+    if common.dp is None:
+        common.dp = dpG
 
 async def process_start(message: types.Message, state: FSMContext):
         

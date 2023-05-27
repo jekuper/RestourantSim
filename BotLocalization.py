@@ -16,6 +16,14 @@ COMMANDS = {
         "ru" : "нанять",
         "en" : "employ",
     },
+    "chiefs" : {
+        "ru" : "повара",
+        "en" : "chiefs",
+    },
+    "servants" : {
+        "ru" : "официанты",
+        "en" : "servants",
+    },
 }
 PHRASES = {
     "languageChange" : {
@@ -35,8 +43,20 @@ PHRASES = {
         "en" : "Name must include only latin characters and numbers",
     },
     "nameSet" :{
-        "ru" : "Имя успешно установлено\nТеперь тебе нужно нанять свой первый персонал!\n\nОткрыть рынок рабочих - "+COMMANDS["employment"],
-        "en" : "Name set successfully/\nNow you need to hire new employees!",
+        "ru" : "Имя успешно установлено\nТеперь тебе нужно нанять свой первый персонал!\n\nОткрыть рынок рабочих - /"+COMMANDS["employment"]["ru"],
+        "en" : "Name set successfully/\nNow you need to hire new employees!\n\nOpen store - /"+COMMANDS["employment"]["en"],
+    },
+    "storeCategory" :{
+        "ru" : "Выбери категорию покупки",
+        "en" : "Select shop category",
+    },
+    "selectChiefStore" :{
+        "ru" : "Выбери повара которого хотите нанять",
+        "en" : "Select chief to hire",
+    },
+    "selectServantStore" :{
+        "ru" : "Выбери официанта которого хотите нанять",
+        "en" : "Select servant to hire",
     },
 }
 
