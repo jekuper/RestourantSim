@@ -8,6 +8,10 @@ COMMANDS = {
         "ru" : "старт",
         "en" : "start",
     },
+    "profile" : {
+        "ru" : "профиль",
+        "en" : "profile",
+    },
     "language" : {
         "ru" : "язык",
         "en" : "language",
@@ -57,6 +61,42 @@ PHRASES = {
     "selectServantStore" :{
         "ru" : "Выбери официанта которого хотите нанять",
         "en" : "Select servant to hire",
+    },
+    "human_deal_not_found" :{
+        "ru" : "Такая сделка больше не существует",
+        "en" : "Selected deal no longer exists",
+    },
+    "deal_confirmation" :{
+        "ru" : "Хотите купить?",
+        "en" : "Agree to buy?",
+    },
+    "agree" :{
+        "ru" : "Согласен",
+        "en" : "Agree",
+    },
+    "disagree" :{
+        "ru" : "Не согласен",
+        "en" : "Disagree",
+    },
+    "income" :{
+        "ru" : "прибыль",
+        "en" : "income",
+    },
+    "cost" :{
+        "ru" : "цена",
+        "en" : "cost",
+    },
+    "job_type" :{
+        "ru" : "Должность",
+        "en" : "Job",
+    },
+    "not_enough_balance" :{
+        "ru" : "Не хватает денег",
+        "en" : "Not enough balance",
+    },
+    "successful_deal" :{
+        "ru" : "Успешная покупка",
+        "en" : "Bought successfully",
     },
 }
 
