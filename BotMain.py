@@ -5,7 +5,7 @@ from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
-from handlers import greeting, store
+from handlers import greeting, store, profile
 
 from BotConfigs import USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE_NAME, TOKEN
 import BotDataBase
@@ -22,6 +22,7 @@ dispatcher.middleware.setup(LoggingMiddleware())
 
 greeting.register_handlers(dispatcher)
 store.register_handlers(dispatcher)
+profile.register_handlers(dispatcher)
 
 async def onShutdown(dp: Dispatcher):
     await dp.storage.close()
