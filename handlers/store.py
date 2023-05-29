@@ -12,13 +12,20 @@ def register_handlers(dpG: Dispatcher):
     dpG.register_message_handler(process_category, lambda msg: BotLocalization.check_command_localization("employment", msg) is not None, state=[BotStates.FIRST_WORKER, None])
     dpG.register_message_handler(process_chiefs_store, lambda msg: BotLocalization.check_command_localization("chiefs", msg) is not None, state=[None])
     dpG.register_message_handler(process_servant_store, lambda msg: BotLocalization.check_command_localization("servants", msg) is not None, state=[None])
-
+    
+    dpG.register_message_handler(process_building, lambda msg: BotLocalization.check_command_localization("extensions", msg) is not None, state=[None])
+    dpG.register_message_handler(process_kitchen_extension, lambda msg: BotLocalization.check_command_localization("kitchen", msg) is not None, state=[None])
+    dpG.register_message_handler(process_lounge_extension, lambda msg: BotLocalization.check_command_localization("lounge", msg) is not None, state=[None])
+    dpG.register_message_handler(process_k_extension_final, lambda msg: BotLocalization.check_command_localization("extend_kitchen", msg) is not None, state=[None])
+    dpG.register_message_handler(process_l_extension_final, lambda msg: BotLocalization.check_command_localization("extend_lounge", msg) is not None, state=[None])
+    
     dpG.register_callback_query_handler(process_callback_human_select, regexp=r"human_\d+", state=[None])
     dpG.register_callback_query_handler(process_callback_deal_completion, state=[BotStates.COMPLETING_DEAL])
 
     if common.dp is None:
         common.dp = dpG
 
+#region human deals
 async def process_category(message: types.Message, state: FSMContext):
     await state.reset_state()
 
@@ -99,6 +106,10 @@ async def process_callback_deal_completion(callback_query: types.CallbackQuery, 
         await callback_query.message.delete()
         await state.finish()
         return
+    if (deal.job_type is BotDataBase.job_types.chief and not BotDataBase.can_buy_k(callback_query.from_user.id)) or \
+        (deal.job_type is BotDataBase.job_types.servant and not BotDataBase.can_buy_l(callback_query.from_user.id)):
+        await callback_query.message.edit_text(PHRASES["not_enough_space"][user_language], reply_markup=None)
+        return
 
     if BotDataBase.get_balance(callback_query.from_user.id) >= deal.cost:
         BotDataBase.buy_human(callback_query.from_user.id, deal)
@@ -106,3 +117,51 @@ async def process_callback_deal_completion(callback_query: types.CallbackQuery, 
     else:
         await callback_query.message.edit_text(PHRASES["not_enough_balance"][user_language]+":\n\n"+get_human_deal_message(deal, user_language), reply_markup=None)
     await state.finish()
+#endregion
+
+#region extensions
+async def process_building(message: types.Message, state: FSMContext):
+    categorySelection = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    user_language = BotDataBase.get_user_language(message.from_id)
+    
+    lounge = KeyboardButton(COMMANDS["lounge"][user_language])
+    kitchen = KeyboardButton(COMMANDS["kitchen"][user_language])
+    categorySelection.add(lounge)
+    categorySelection.add(kitchen)
+
+    await message.reply(PHRASES["extension_category"][user_language], reply_markup=categorySelection)
+
+def get_extension_cost(stats):
+    level = stats[1] // 5
+    return recursive_ext_cost(level) 
+def recursive_ext_cost(level : int):
+    if level <= 1:
+        return 500
+    val = recursive_ext_cost(level - 1)
+    return val + (val // 3)
+
+async def process_kitchen_extension(message: types.Message, state: FSMContext):
+    user_language = BotDataBase.get_user_language(message.from_id)
+    
+    kitchen_stats = BotDataBase.get_kitchen_stats(message.from_id)
+
+    await message.reply(PHRASES["k_stats"][user_language]+str(kitchen_stats[0]) + "/" + str(kitchen_stats[1]) + "\n" + PHRASES["ext_cost"][user_language] + ":"+str(get_extension_cost(kitchen_stats))+"\n\n" + PHRASES["k_tip"][user_language])
+
+async def process_lounge_extension(message: types.Message, state: FSMContext):
+    user_language = BotDataBase.get_user_language(message.from_id)
+    
+    lounge_stats = BotDataBase.get_lounge_stats(message.from_id)
+
+    await message.reply(PHRASES["l_stats"][user_language]+str(lounge_stats[0]) + "/" + str(lounge_stats[1]) + "\n" + PHRASES["ext_cost"][user_language] + ":"+str(get_extension_cost(lounge_stats))+"\n\n" + PHRASES["l_tip"][user_language])
+async def process_k_extension_final(message: types.Message, state: FSMContext):
+    user_language = BotDataBase.get_user_language(message.from_id)
+
+    cost = get_extension_cost(BotDataBase.get_lounge_stats(message.from_id))
+    if cost > BotDataBase.get_balance(message.from_id):
+        await message.reply(PHRASES["not_enough_balance"][user_language])
+        return
+    BotDataBase.change_balance(message.from_id, -cost)
+    
+async def process_l_extension_final(message: types.Message, state: FSMContext):
+    pass
+#endregion

@@ -16,6 +16,10 @@ COMMANDS = {
         "ru" : "язык",
         "en" : "language",
     },
+    "extensions" : {
+        "ru" : "расширения",
+        "en" : "extensions",
+    },
     "employment" : {
         "ru" : "нанять",
         "en" : "employ",
@@ -27,6 +31,22 @@ COMMANDS = {
     "servants" : {
         "ru" : "официанты",
         "en" : "servants",
+    },
+    "kitchen" : {
+        "ru" : "кухня",
+        "en" : "kitchen",
+    },
+    "lounge" : {
+        "ru" : "зал",
+        "en" : "lounge",
+    },
+    "extend_kitchen" : {
+        "ru" : "расширить_кухню",
+        "en" : "extend_kitchen",
+    },
+    "extend_lounge" : {
+        "ru" : "расширить_зал",
+        "en" : "extend_lounge",
     },
 }
 PHRASES = {
@@ -94,9 +114,37 @@ PHRASES = {
         "ru" : "Не хватает денег",
         "en" : "Not enough balance",
     },
+    "not_enough_space" :{
+        "ru" : "Не хватает пространтсва. Попробуйте расширить заведение",
+        "en" : "Not enough space. Try extending building",
+    },
     "successful_deal" :{
         "ru" : "Успешная покупка",
         "en" : "Bought successfully",
+    },
+    "extension_category" :{
+        "ru" : "Выбери что хотим расширить",
+        "en" : "Select extension",
+    },
+    "k_stats" : {
+        "ru" : "текущая вместимость кухни - ",
+        "en" : "current kitchen workload - ",
+    },
+    "k_tip" : {
+        "ru" : "Используйте /"+COMMANDS["extend_kitchen"]["ru"]+" для расширения кухни",
+        "en" : "Use /"+COMMANDS["extend_kitchen"]["en"]+" to extend kitchen",
+    },
+    "l_stats" : {
+        "ru" : "текущая вместимость зала - ",
+        "en" : "current restourant lounge workload - ",
+    },
+    "l_tip" : {
+        "ru" : "Используйте /"+COMMANDS["extend_kitchen"]["ru"]+" для расширения кухни",
+        "en" : "Use /"+COMMANDS["extend_lounge"]["en"]+" to extend lounge",
+    },
+    "ext_cost" : {
+        "ru" : "Цена расширения",
+        "en" : "Extension cost",
     },
 }
 
