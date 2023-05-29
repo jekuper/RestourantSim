@@ -3,8 +3,9 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, Integer, BigInteger, Enum, String, \
     Column
+from sqlalchemy.dialects.mysql import MEDIUMINT
 import enum
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session
 import json
 
 from BotLocalization import LOCALIZATIONS
@@ -22,11 +23,13 @@ class user_settings(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(BigInteger)
     language = Column(String(255))
+
 class user_property(Base):
     __tablename__ = 'user_property'
     id = Column(Integer, primary_key=True)
     user_id = Column(BigInteger)
     balance = Column(Integer)
+
 class restourant(Base):
     __tablename__ = 'restourants'
     id = Column(Integer, primary_key=True)
@@ -34,6 +37,11 @@ class restourant(Base):
     name = Column(String(255))
     income = Column(BigInteger)
     workers = Column(String(16777215))
+    kitchen_workload = Column(MEDIUMINT)
+    kitchen_workload_max = Column(MEDIUMINT)
+    lounge_workload = Column(MEDIUMINT)
+    lounge_workload_max = Column(MEDIUMINT)
+
 class human_deal(Base):
     __tablename__ = 'human_deals'
     id = Column(Integer, primary_key=True)
@@ -50,24 +58,6 @@ def Connect() -> Engine:
     engine = create_engine("mysql+mysqldb://"+USERNAME+":"+PASSWORD+"@"+HOSTNAME+":"+str(PORT)+"/"+DATABASE_NAME, pool_size=10, pool_pre_ping=True)
     
     return engine
-
-def update_user_settings(user_id: int, language: str):
-    session = Session(bind=engine)
-    settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
-    if settings is None:
-        return
-    settings.language = language
-    
-    session.add(settings)
-    session.commit()
-
-def get_user_language(user_id: int) -> str:
-    session = Session(bind=engine)
-    settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
-    if settings is None:
-        return None
-    return settings.language
-
 def insert_new_user(user_id: int) -> bool:
     session = Session(bind=engine)
     settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
@@ -81,6 +71,10 @@ def insert_new_user(user_id: int) -> bool:
             name="no_name",
             income=0,
             workers="[]",
+            kitchen_workload = 0,
+            kitchen_workload_max = 5,
+            lounge_workload = 0,
+            lounge_workload_max = 5,
         )
         property = user_property(
             user_id=user_id,
@@ -91,6 +85,25 @@ def insert_new_user(user_id: int) -> bool:
         return True
     return False
 
+#region user_settings
+def update_user_settings(user_id: int, language: str):
+    session = Session(bind=engine)
+    settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
+    if settings is None:
+        return
+    settings.language = language
+    
+    session.add(settings)
+    session.commit()
+def get_user_language(user_id: int) -> str:
+    session = Session(bind=engine)
+    settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
+    if settings is None:
+        return None
+    return settings.language
+#endregion
+
+#region restourant
 def set_restourant_name(user_id: int, name: str):
     session = Session(bind=engine)
     rest = session.query(restourant).filter(restourant.user_id==user_id).first()
@@ -99,7 +112,7 @@ def set_restourant_name(user_id: int, name: str):
     rest.name = name
     session.add(rest)
     session.commit()
-def get_restourant(user_id: int):
+def get_restourant(user_id: int) -> restourant:
     session = Session(bind=engine)
     rest = session.query(restourant).filter(restourant.user_id==user_id).first()
     return rest
@@ -110,7 +123,105 @@ def get_income (user_id: int) -> int:
     if rest is None:
         return 0
     return rest[0]
+def recalculate_income (user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    workers = json.loads(rest.workers)
+    incomes = session.query(human_deal.id, human_deal.income).filter(human_deal.id.in_(workers)).all()
+    if incomes is None:
+        return
+    total_income = 0
+    d = {}
+    for e in incomes:
+        d[e[0]] = e[1]
+    for e in workers:
+        total_income += d[e]
 
+    rest.income = total_income
+    session.add(rest)
+    session.commit()
+def recalculate_workload (user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    workers = json.loads(rest.workers)
+    jobs = session.query(human_deal.id, human_deal.job_type).filter(human_deal.id.in_(workers)).all()
+    if jobs is None:
+        return
+    d = {}
+    k_workload = 0
+    l_workload = 0
+    for e in jobs:
+        d[e[0]] = e[1]
+    for e in workers:
+        if d[e] == job_types.chief:
+            k_workload += 1
+        else:
+            l_workload += 1
+
+    rest.kitchen_workload = k_workload
+    rest.lounge_workload = l_workload
+    session.add(rest)
+    session.commit()
+    
+def get_workers(user_id: int) -> list[int]:
+    session = Session(bind=engine)
+    workers = session.query(restourant.workers).filter(restourant.user_id==user_id).first()
+    if workers is None:
+        return None
+    return json.loads(workers[0])
+def set_workers(user_id: int, new_list: list[int]):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.workers = json.dumps(new_list)
+
+    session.add(rest)
+    session.commit()
+def get_kitchen_stats(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant.kitchen_workload, restourant.kitchen_workload_max).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return [0, -1]
+    return rest
+def get_lounge_stats(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant.lounge_workload, restourant.lounge_workload_max).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return [0, -1]
+    return rest
+def extend_kitchen(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.kitchen_workload_max += 5
+
+    session.add(rest)
+    session.commit()
+
+def extend_lounge(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.lounge_workload_max += 5
+
+    session.add(rest)
+    session.commit()
+def can_buy_k(user_id: int):
+    rest = get_restourant(user_id)
+    return rest.kitchen_workload < rest.kitchen_workload_max
+def can_buy_l(user_id: int):
+    rest = get_restourant(user_id)
+    return rest.lounge_workload < rest.lounge_workload_max
+#endregion
+
+#region property
 def get_property (user_id: int) -> user_property:
     session = Session(bind=engine)
     rest = session.query(user_property).filter(user_property.user_id==user_id).first()
@@ -132,45 +243,9 @@ def change_balance(user_id: int, delta: int):
     property.balance += delta
     session.add(property)
     session.commit()
+#endregion  
 
-def recalculate_income (user_id: int):
-    session = Session(bind=engine)
-    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
-    if rest is None:
-        return
-    workers = json.loads(rest.workers)
-    incomes = session.query(human_deal.id, human_deal.income).filter(human_deal.id.in_(workers)).all()
-    if incomes is None:
-        return
-    total_income = 0
-    d = {}
-    for e in incomes:
-        d[e[0]] = e[1]
-    for e in workers:
-        total_income += d[e]
-
-    rest.income = total_income
-    session.add(rest)
-    session.commit()
-    
-        
-
-def get_workers(user_id: int) -> list[int]:
-    session = Session(bind=engine)
-    workers = session.query(restourant.workers).filter(restourant.user_id==user_id).first()
-    if workers is None:
-        return None
-    return json.loads(workers[0])
-def set_workers(user_id: int, new_list: list[int]):
-    session = Session(bind=engine)
-    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
-    if rest is None:
-        return
-    rest.workers = json.dumps(new_list)
-
-    session.add(rest)
-    session.commit()
-
+#region human deals
 def get_available_human_deals (user_id: int, job_type: job_types) -> list[human_deal]:
     session = Session(bind=engine)
     deals = session.query(human_deal).filter(human_deal.job_type == job_type, human_deal.minimum_income <= get_income(user_id)).all()
@@ -190,4 +265,5 @@ def buy_human(user_id: int, deal: human_deal):
     workers.append(deal.id)
     set_workers(user_id, workers)
     recalculate_income(user_id)
-
+    recalculate_workload(user_id)
+#endregion
