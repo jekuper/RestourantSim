@@ -1,14 +1,17 @@
 from BotConfigs import HOSTNAME, PORT, USERNAME, PASSWORD, DATABASE_NAME
 from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Integer, BigInteger, Enum, String, \
+from sqlalchemy import create_engine, Integer, BigInteger, Enum, String, DateTime, \
     Column
 from sqlalchemy.dialects.mysql import MEDIUMINT
 import enum
 from sqlalchemy.orm import Session
 import json
+from sqlalchemy.sql import func
+import datetime
+import random
 
-from BotLocalization import LOCALIZATIONS
+from BotLocalization import LOCALIZATIONS, PHRASES
 
 Base = declarative_base()
 
@@ -35,12 +38,14 @@ class restourant(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(BigInteger)
     name = Column(String(255))
+    last_active = Column(DateTime(timezone=True), server_default=func.now())
     income = Column(BigInteger)
     workers = Column(String(16777215))
     kitchen_workload = Column(MEDIUMINT)
     kitchen_workload_max = Column(MEDIUMINT)
     lounge_workload = Column(MEDIUMINT)
     lounge_workload_max = Column(MEDIUMINT)
+    tax_debt = Column(Integer)
 
 class human_deal(Base):
     __tablename__ = 'human_deals'
@@ -52,6 +57,8 @@ class human_deal(Base):
     income = Column(Integer)
     minimum_income = Column(Integer)
 
+def bool_based_on_probability(probability=0.5) -> bool:
+    return random.random() < probability
 
 def Connect() -> Engine:
     global engine
@@ -70,11 +77,13 @@ def insert_new_user(user_id: int) -> bool:
             user_id=user_id,
             name="no_name",
             income=0,
+            last_active=datetime.datetime(2000, 1, 1, 0, 0, 0, 0),
             workers="[]",
             kitchen_workload = 0,
             kitchen_workload_max = 5,
             lounge_workload = 0,
             lounge_workload_max = 5,
+            tax_debt = 0,
         )
         property = user_property(
             user_id=user_id,
@@ -84,6 +93,7 @@ def insert_new_user(user_id: int) -> bool:
         session.commit()
         return True
     return False
+
 
 #region user_settings
 def update_user_settings(user_id: int, language: str):
@@ -219,6 +229,59 @@ def can_buy_k(user_id: int):
 def can_buy_l(user_id: int):
     rest = get_restourant(user_id)
     return rest.lounge_workload < rest.lounge_workload_max
+
+def record_active(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.last_active = func.now()
+
+    session.add(rest)
+    session.commit()
+def get_last_active (user_id: int) -> datetime.datetime:
+    session = Session(bind=engine)
+    rest = session.query(restourant.last_active).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return 0
+    return rest[0]
+def can_start_shift(user_id: int) -> bool:
+    last = get_last_active(user_id)
+    dif = datetime.datetime.now() - last
+    if dif.total_seconds() >= 3600 * 3:
+        return True
+    return False
+def get_wait_time(user_id: int) -> datetime.timedelta:
+    last = get_last_active(user_id)
+    dif = datetime.datetime.now() - last
+    return datetime.timedelta(seconds=3600 * 3 - dif.total_seconds())
+
+def change_debt(user_id: int, delta: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.tax_debt += delta
+    session.add(rest)
+    session.commit()
+def nullify_debt(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.tax_debt = 0
+    session.add(rest)
+    session.commit()
+def get_debt (user_id: int) -> int:
+    session = Session(bind=engine)
+    rest = session.query(restourant.tax_debt).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return 0
+    return rest[0]
+def get_total_debt(user_id: int) -> int:
+    if get_debt(user_id) == 0:
+        return 0
+    return get_debt(user_id) * 2 + (get_balance(user_id) // 2)
 #endregion
 
 #region property
@@ -243,6 +306,7 @@ def change_balance(user_id: int, delta: int):
     property.balance += delta
     session.add(property)
     session.commit()
+    session.close()
 #endregion  
 
 #region human deals
