@@ -48,6 +48,14 @@ COMMANDS = {
         "ru" : "расширить_зал",
         "en" : "extend_lounge",
     },
+    "start_shift" : {
+        "ru" : "открытие",
+        "en" : "open",
+    },
+    "tax_check" : {
+        "ru" : "налоговая_проверка",
+        "en" : "tax_check",
+    },
 }
 PHRASES = {
     "languageChange" : {
@@ -111,8 +119,8 @@ PHRASES = {
         "en" : "Job",
     },
     "not_enough_balance" :{
-        "ru" : "Не хватает денег",
-        "en" : "Not enough balance",
+        "ru" : "Не хватает денег.\nЦена: {price}$",
+        "en" : "Not enough balance.\nCost: {price}$",
     },
     "not_enough_space" :{
         "ru" : "Не хватает пространтсва. Попробуйте расширить заведение",
@@ -145,6 +153,42 @@ PHRASES = {
     "ext_cost" : {
         "ru" : "Цена расширения",
         "en" : "Extension cost",
+    },
+    "shift_processed" : {
+        "ru" : "Смена отработа успешно!\n\n--------\nЗаработано: {income}",
+        "en" : "Day ended!\n\n--------\nIncome: {income}",
+    },
+    "cant_start_shift" : {
+        "ru" : "Персоналу требуется отдых!\nНачать работу можно через {hours}ч. {minutes}мин.",
+        "en" : "Staff need rest!\nThe next shift is in {hours}h. {minutes}min.",
+    },
+    "tax_paying" : {
+        "ru" : "Хотите оплатить налоги?\nСумма: {tax}",
+        "en" : "Staff need rest!\nThe next shift is in {hours}h. {minutes}min.",
+    },
+    "tax_paid" : {
+        "ru" : "Налоги оплачены!",
+        "en" : "Taxes are paid",
+    },
+    "tax_skipped_suc" : {
+        "ru" : "Вы успешно уклонились от налогов",
+        "en" : "You skipped taxes",
+    },
+    "tax_skipped_fail" : {
+        "ru" : "Вас накрыла налоговая проверка. Вы заплатили за все свои уклонения: {fine}$",
+        "en" : "You got caught on a tax check. You paid for all schemas: {fine}$",
+    },
+    "tax_check_sent" : {
+        "ru" : "Проверка подкуплена и уже направляется к ресторану \"{name}\"",
+        "en" : "Tax check has been sent to restourant \"{name}\"",
+    },
+    "user_not_exist" : {
+        "ru" : "Такого пользователя не существует",
+        "en" : "User doesn't exist",
+    },
+    "provide_reply" : {
+        "ru" : "Чтобы использовать эту команду, надо отправить её ответом на чьё-либо сообщение",
+        "en" : "Use this command as a reply to somebodies message",
     },
 }
 

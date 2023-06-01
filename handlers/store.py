@@ -94,7 +94,7 @@ async def process_callback_human_select(callback_query: types.CallbackQuery, sta
         await state.update_data(selected_deal=deal)
         await callback_query.message.edit_text(PHRASES["deal_confirmation"][user_language]+"\n\n"+get_human_deal_message(deal, user_language), reply_markup=markup)
     else:
-        await callback_query.message.edit_text(PHRASES["not_enough_balance"][user_language]+":\n\n"+get_human_deal_message(deal, user_language), reply_markup=None)
+        await callback_query.message.edit_text(PHRASES["not_enough_balance"][user_language].format(price=str(deal.cost))+":\n\n"+get_human_deal_message(deal, user_language), reply_markup=None)
     
 async def process_callback_deal_completion(callback_query: types.CallbackQuery, state: FSMContext):
     user_language = BotDataBase.get_user_language(callback_query.from_user.id)
@@ -115,7 +115,7 @@ async def process_callback_deal_completion(callback_query: types.CallbackQuery, 
         BotDataBase.buy_human(callback_query.from_user.id, deal)
         await callback_query.message.edit_text(PHRASES["successful_deal"][user_language]+"!\n\n", reply_markup=None)
     else:
-        await callback_query.message.edit_text(PHRASES["not_enough_balance"][user_language]+":\n\n"+get_human_deal_message(deal, user_language), reply_markup=None)
+        await callback_query.message.edit_text(PHRASES["not_enough_balance"][user_language].format(price=str(deal.cost))+":\n\n"+get_human_deal_message(deal, user_language), reply_markup=None)
     await state.finish()
 #endregion
 
@@ -156,12 +156,24 @@ async def process_lounge_extension(message: types.Message, state: FSMContext):
 async def process_k_extension_final(message: types.Message, state: FSMContext):
     user_language = BotDataBase.get_user_language(message.from_id)
 
-    cost = get_extension_cost(BotDataBase.get_lounge_stats(message.from_id))
+    cost = get_extension_cost(BotDataBase.get_kitchen_stats(message.from_id))
     if cost > BotDataBase.get_balance(message.from_id):
-        await message.reply(PHRASES["not_enough_balance"][user_language])
+        await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(cost)))
         return
-    BotDataBase.change_balance(message.from_id, -cost)
+    else:
+        BotDataBase.change_balance(message.from_id, -cost)
+        BotDataBase.extend_kitchen(message.from_id)
+        await message.reply(PHRASES["successful_deal"][user_language])
     
 async def process_l_extension_final(message: types.Message, state: FSMContext):
-    pass
+    user_language = BotDataBase.get_user_language(message.from_id)
+
+    cost = get_extension_cost(BotDataBase.get_lounge_stats(message.from_id))
+    if cost > BotDataBase.get_balance(message.from_id):
+        await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(cost)))
+        return
+    else:
+        BotDataBase.change_balance(message.from_id, -cost)
+        BotDataBase.extend_lounge(message.from_id)
+        await message.reply(PHRASES["successful_deal"][user_language])
 #endregion
