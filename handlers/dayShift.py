@@ -20,11 +20,12 @@ async def process_shift(message: types.Message, state: FSMContext):
 
     if BotDataBase.can_start_shift(message.from_id):
         income = BotDataBase.get_income(message.from_id)
+        damage = BotDataBase.get_brawl_damage(message.from_id)
+        BotDataBase.nullify_brawl_damage(message.from_id)
         tax = int(income // 2)
-
-        BotDataBase.change_balance(message.from_id, income)
+        BotDataBase.change_balance(message.from_id, income - damage)
         BotDataBase.record_active(message.from_id)
-        await message.reply(PHRASES["shift_processed"][user_language].format(income=str(income)))
+        await message.reply(PHRASES["shift_processed"][user_language].format(income=str(income), damage=str(damage), profit=str(income-damage)))
 
         
         choice = InlineKeyboardMarkup()
@@ -45,8 +46,8 @@ async def process_callback_tax_responce(callback_query: types.CallbackQuery, sta
     if "tax_disagree" in callback_query.data:
         responce = False
     if responce:
-        BotDataBase.change_balance(callback_query.from_user.id, tax)
-        await callback_query.message.edit_text(PHRASES["tax_paid"][user_language], reply_markup=None)
+        BotDataBase.change_balance(callback_query.from_user.id, -tax)
+        await callback_query.message.edit_text(PHRASES["tax_paid"][user_language].format(tax=str(tax)), reply_markup=None)
     else:
         BotDataBase.change_debt(callback_query.from_user.id, tax)
         total_tax = BotDataBase.get_total_debt(callback_query.from_user.id)
