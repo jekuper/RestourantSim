@@ -46,6 +46,7 @@ class restourant(Base):
     lounge_workload = Column(MEDIUMINT)
     lounge_workload_max = Column(MEDIUMINT)
     tax_debt = Column(Integer)
+    brawl_damage = Column(Integer)
 
 class human_deal(Base):
     __tablename__ = 'human_deals'
@@ -282,6 +283,29 @@ def get_total_debt(user_id: int) -> int:
     if get_debt(user_id) == 0:
         return 0
     return get_debt(user_id) * 2 + (get_balance(user_id) // 2)
+
+def change_brawl_damage(user_id: int, delta: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.brawl_damage += delta
+    session.add(rest)
+    session.commit()
+def nullify_brawl_damage(user_id: int):
+    session = Session(bind=engine)
+    rest = session.query(restourant).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return
+    rest.brawl_damage = 0
+    session.add(rest)
+    session.commit()
+def get_brawl_damage (user_id: int) -> int:
+    session = Session(bind=engine)
+    rest = session.query(restourant.brawl_damage).filter(restourant.user_id==user_id).first()
+    if rest is None:
+        return 0
+    return rest[0]
 #endregion
 
 #region property

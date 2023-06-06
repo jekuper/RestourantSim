@@ -56,6 +56,10 @@ COMMANDS = {
         "ru" : "налоговая_проверка",
         "en" : "tax_check",
     },
+    "brawl" : {
+        "ru" : "дебош",
+        "en" : "brawl",
+    },
 }
 PHRASES = {
     "languageChange" : {
@@ -155,8 +159,8 @@ PHRASES = {
         "en" : "Extension cost",
     },
     "shift_processed" : {
-        "ru" : "Смена отработа успешно!\n\n--------\nЗаработано: {income}",
-        "en" : "Day ended!\n\n--------\nIncome: {income}",
+        "ru" : "Смена отработа успешно!\n\n--------\nЗаработано: {income}\nРасходы из-за дебоша: {damage}\n\nЧистая прибыль: {profit}",
+        "en" : "Day ended!\n\n--------\nIncome: {income}\nBrawl damage: {damage}\n\nNet profit: {profit}",
     },
     "cant_start_shift" : {
         "ru" : "Персоналу требуется отдых!\nНачать работу можно через {hours}ч. {minutes}мин.",
@@ -167,8 +171,8 @@ PHRASES = {
         "en" : "Staff need rest!\nThe next shift is in {hours}h. {minutes}min.",
     },
     "tax_paid" : {
-        "ru" : "Налоги оплачены!",
-        "en" : "Taxes are paid",
+        "ru" : "Налоги оплачены в размере {tax}$!",
+        "en" : "Taxes are paid. \nAmount: {tax}",
     },
     "tax_skipped_suc" : {
         "ru" : "Вы успешно уклонились от налогов",
@@ -189,6 +193,10 @@ PHRASES = {
     "provide_reply" : {
         "ru" : "Чтобы использовать эту команду, надо отправить её ответом на чьё-либо сообщение",
         "en" : "Use this command as a reply to somebodies message",
+    },
+    "brawl_level_increased" : {
+        "ru" : "Бомжи наняты и уже движутся к ресторану \"{name}\".\nВашего конкурента ждёт неприятная смена!",
+        "en" : "Brawlers are hired and already in \"{name}\".\nIt would be bad day for your opponent!",
     },
 }
 
