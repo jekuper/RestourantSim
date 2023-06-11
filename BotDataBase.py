@@ -85,6 +85,7 @@ def insert_new_user(user_id: int) -> bool:
             lounge_workload = 0,
             lounge_workload_max = 5,
             tax_debt = 0,
+            brawl_damage = 0,
         )
         property = user_property(
             user_id=user_id,
@@ -97,7 +98,7 @@ def insert_new_user(user_id: int) -> bool:
 
 
 #region user_settings
-def update_user_settings(user_id: int, language: str):
+def update_user_language(user_id: int, language: str):
     session = Session(bind=engine)
     settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
     if settings is None:
@@ -108,10 +109,16 @@ def update_user_settings(user_id: int, language: str):
     session.commit()
 def get_user_language(user_id: int) -> str:
     session = Session(bind=engine)
+    settings = session.query(user_settings.language).filter(user_settings.user_id==user_id).first()
+    if settings is None:
+        return None
+    return settings[0]
+def get_user_settings(user_id: int) -> user_settings:
+    session = Session(bind=engine)
     settings = session.query(user_settings).filter(user_settings.user_id==user_id).first()
     if settings is None:
         return None
-    return settings.language
+    return settings
 #endregion
 
 #region restourant

@@ -4,7 +4,7 @@ from aiogram.utils import executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
-from handlers import greeting, store, profile, dayShift, taxCheck, brawlOrder
+from handlers import greeting, store, profile, dayShift, taxCheck, brawlOrder, help
 
 from BotConfigs import USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE_NAME, TOKEN
 import BotDataBase
@@ -25,6 +25,7 @@ profile.register_handlers(dispatcher)
 dayShift.register_handlers(dispatcher)
 taxCheck.register_handlers(dispatcher)
 brawlOrder.register_handlers(dispatcher)
+help.register_handlers(dispatcher)
 
 async def onShutdown(dp: Dispatcher):
     await dp.storage.close()

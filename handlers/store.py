@@ -9,15 +9,15 @@ import handlers.common as common
 from BotLocalization import COMMANDS, PHRASES
 
 def register_handlers(dpG: Dispatcher):
-    dpG.register_message_handler(process_category, lambda msg: BotLocalization.check_command_localization("employment", msg) is not None, state=[BotStates.FIRST_WORKER, None])
-    dpG.register_message_handler(process_chiefs_store, lambda msg: BotLocalization.check_command_localization("chiefs", msg) is not None, state=[None])
-    dpG.register_message_handler(process_servant_store, lambda msg: BotLocalization.check_command_localization("servants", msg) is not None, state=[None])
+    dpG.register_message_handler(process_category, lambda msg: BotLocalization.check_command_localization("employment", msg, False) is not None, state=[BotStates.FIRST_WORKER, None])
+    dpG.register_message_handler(process_chiefs_store, lambda msg: BotLocalization.check_command_localization("chiefs", msg, False) is not None, state=[None])
+    dpG.register_message_handler(process_servant_store, lambda msg: BotLocalization.check_command_localization("servants", msg, False) is not None, state=[None])
     
-    dpG.register_message_handler(process_building, lambda msg: BotLocalization.check_command_localization("extensions", msg) is not None, state=[None])
-    dpG.register_message_handler(process_kitchen_extension, lambda msg: BotLocalization.check_command_localization("kitchen", msg) is not None, state=[None])
-    dpG.register_message_handler(process_lounge_extension, lambda msg: BotLocalization.check_command_localization("lounge", msg) is not None, state=[None])
-    dpG.register_message_handler(process_k_extension_final, lambda msg: BotLocalization.check_command_localization("extend_kitchen", msg) is not None, state=[None])
-    dpG.register_message_handler(process_l_extension_final, lambda msg: BotLocalization.check_command_localization("extend_lounge", msg) is not None, state=[None])
+    dpG.register_message_handler(process_building, lambda msg: BotLocalization.check_command_localization("extensions", msg, False) is not None, state=[None])
+    dpG.register_message_handler(process_kitchen_extension, lambda msg: BotLocalization.check_command_localization("kitchen", msg, False) is not None, state=[None])
+    dpG.register_message_handler(process_lounge_extension, lambda msg: BotLocalization.check_command_localization("lounge", msg, False) is not None, state=[None])
+    dpG.register_message_handler(process_k_extension_final, lambda msg: BotLocalization.check_command_localization("extend_kitchen", msg, False) is not None, state=[None])
+    dpG.register_message_handler(process_l_extension_final, lambda msg: BotLocalization.check_command_localization("extend_lounge", msg, False) is not None, state=[None])
     
     dpG.register_callback_query_handler(process_callback_human_select, regexp=r"human_\d+", state=[None])
     dpG.register_callback_query_handler(process_callback_deal_completion, state=[BotStates.COMPLETING_DEAL])
