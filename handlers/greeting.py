@@ -7,8 +7,8 @@ from aiogram.dispatcher import FSMContext
 import handlers.common as common
 
 def register_handlers(dpG: Dispatcher):
-    dpG.register_message_handler(process_start, lambda msg: BotLocalization.check_command_localization("start", msg) is not None, state=None)
-    dpG.register_message_handler(process_language_switch, lambda msg: BotLocalization.check_command_localization("language", msg) is not None, state=None)
+    dpG.register_message_handler(process_start, lambda msg: BotLocalization.check_command_localization("start", msg, False) is not None, state=None)
+    dpG.register_message_handler(process_language_switch, lambda msg: BotLocalization.check_command_localization("language", msg, False) is not None, state=None)
     dpG.register_message_handler(process_restaurant_name, state=BotStates.SELECTING_NAME)
 
     dpG.register_callback_query_handler(process_callback_localization, text=BotLocalization.LOCALIZATIONS, state=[BotStates.LANGUAGE_SWITCH, BotStates.FIRST_LANGUAGE_SWITCH])
@@ -29,7 +29,7 @@ async def process_language_switch(message: types.Message, state: FSMContext):
     await BotStates.LANGUAGE_SWITCH.set()
 
 async def process_callback_localization(callback_query: types.CallbackQuery, state: FSMContext):
-    BotDataBase.update_user_settings(callback_query.from_user.id, callback_query.data)
+    BotDataBase.update_user_language(callback_query.from_user.id, callback_query.data)
     await callback_query.answer(BotLocalization.PHRASES["languageChange"][callback_query.data])
     await callback_query.message.edit_text(BotLocalization.PHRASES["languageChange"][callback_query.data])
 

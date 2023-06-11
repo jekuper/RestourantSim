@@ -9,7 +9,7 @@ import handlers.common as common
 from BotLocalization import COMMANDS, PHRASES
 
 def register_handlers(dpG: Dispatcher):
-    dpG.register_message_handler(process_shift, lambda msg: BotLocalization.check_command_localization("start_shift", msg) is not None, state=[None])
+    dpG.register_message_handler(process_shift, lambda msg: BotLocalization.check_command_localization("start_shift", msg, False) is not None, state=[None])
     dpG.register_callback_query_handler(process_callback_tax_responce, regexp=r"tax_(agree|disagree)_\d+", state=[None])
     
     if common.dp is None:
