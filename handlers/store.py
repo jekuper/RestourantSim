@@ -109,6 +109,7 @@ async def process_callback_deal_completion(callback_query: types.CallbackQuery, 
     if (deal.job_type is BotDataBase.job_types.chief and not BotDataBase.can_buy_k(callback_query.from_user.id)) or \
         (deal.job_type is BotDataBase.job_types.servant and not BotDataBase.can_buy_l(callback_query.from_user.id)):
         await callback_query.message.edit_text(PHRASES["not_enough_space"][user_language], reply_markup=None)
+        await state.finish()
         return
 
     if BotDataBase.get_balance(callback_query.from_user.id) >= deal.cost:

@@ -61,6 +61,9 @@ class human_deal(Base):
 def bool_based_on_probability(probability=0.5) -> bool:
     return random.random() < probability
 
+def random_float(minInclusive, maxInclusive) -> float:
+    return random.uniform(minInclusive, maxInclusive)
+
 def Connect() -> Engine:
     global engine
     engine = create_engine("mysql+mysqldb://"+USERNAME+":"+PASSWORD+"@"+HOSTNAME+":"+str(PORT)+"/"+DATABASE_NAME, pool_size=10, pool_pre_ping=True)

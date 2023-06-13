@@ -39,6 +39,6 @@ async def process_brawl_order(message: types.Message, state: FSMContext):
         BotDataBase.change_balance(message.from_id, -cost)
         
         BotDataBase.change_brawl_damage(target_id, cost)
-        await message.reply(PHRASES["brawl_level_increased"][user_language].format(name=BotDataBase.get_restourant(target_id).name))
+        await message.reply(PHRASES["brawl_level_increased"][user_language].format(name=BotDataBase.get_restourant(target_id).name, cost=cost))
     else:
         await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(cost)))
