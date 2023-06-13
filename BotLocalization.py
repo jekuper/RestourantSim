@@ -94,6 +94,24 @@ COMMANDS = {
         "desc_ru" : "Выводит инструкции к боту либо к опреденной команде",
         "desc_en" : "Outputs instructions to the bot or to a specific command",
     },
+    "duel" : {
+        "ru" : "дуель",
+        "en" : "duel",
+        "desc_ru" : "Вызывает игрока на дуель. Нужно послать ответом на сообщение игрока который является целью",
+        "desc_en" : "Challenges the player to a duel. You need to send a response to the message of the player who is the target",
+    },
+    "coin" : {
+        "ru" : "coin",
+        "en" : "монетка",
+        "desc_ru" : "Подбрасывает монетку. Есть шанс удвоить ставку",
+        "desc_en" : "Flips a coin. There is a chance to double the bet",
+    },
+    "crash" : {
+        "ru" : "crash",
+        "en" : "краш",
+        "desc_ru" : "Начинает игру в краш",
+        "desc_en" : "Starts crash game",
+    },
 }
 PHRASES = {
     "default_help" : {
@@ -221,31 +239,67 @@ PHRASES = {
         "en" : "You got caught on a tax check. You paid for all schemas: {fine}$",
     },
     "tax_check_sent" : {
-        "ru" : "Проверка подкуплена и уже направляется к ресторану \"{name}\"",
-        "en" : "Tax check has been sent to restourant \"{name}\"",
+        "ru" : "Проверка подкуплена и уже направляется к ресторану \"{name}\". За проверку заплачено: {cost}$",
+        "en" : "Tax check has been sent to restourant \"{name}\". You paid: {cost}$",
     },
     "user_not_exist" : {
         "ru" : "Такого пользователя не существует",
         "en" : "User doesn't exist",
+    },
+    "you_not_target" : {
+        "ru" : "Ты не цель.\nТолько цель может взаимодействовать с этим сообщением!",
+        "en" : "You are not target.\nOnly target can interact with message!",
     },
     "provide_reply" : {
         "ru" : "Чтобы использовать эту команду, надо отправить её ответом на чьё-либо сообщение",
         "en" : "Use this command as a reply to somebodies message",
     },
     "brawl_level_increased" : {
-        "ru" : "Бомжи наняты и уже движутся к ресторану \"{name}\".\nТвоего конкурента ждёт неприятная смена!",
-        "en" : "Brawlers are hired and already in \"{name}\".\nIt would be bad day for your opponent!",
+        "ru" : "Бомжи наняты и уже движутся к ресторану \"{name}\".\nТвоего конкурента ждёт неприятная смена!\nУбытков будет примерно на {cost}$",
+        "en" : "Brawlers are hired and already in \"{name}\".\nIt would be bad day for your opponent!\nLosses will be approximately at {cost}$",
     },
     "incorrect_command" : {
-        "ru" : "Команда \"{command}\" не найдена",
-        "en" : "Command \"{command}\" not found",
+        "ru" : "Команда \"{command}\" не найдена или введена не верно",
+        "en" : "Command \"{command}\" not found or not enough arguments provided",
     },
     "brawl_self" : {
         "ru" : "Глупо заказывать дебош в свой же ресторан!",
         "en" : "You can't order a brawl in your own restourant!",
     },
+    "duel_self" : {
+        "ru" : "Нельзя бросать дуэль самому себе!",
+        "en" : "You can't duel yourself!",
+    },
+    "duel_check" : {
+        "ru" : "<a href=\"tg://user?id={target}\">{targetName}</a>, вы принимаете игру с <a href=\"tg://user?id={initiator}\">{initiatorName}</a> на {cost}$?",
+        "en" : "<a href=\"tg://user?id={target}\">{targetName}</a>, do you accept duel from <a href=\"tg://user?id={initiator}\">{initiatorName}</a> for {cost}$?",
+    },
+    "duel_disagree" : {
+        "ru" : "<a href=\"tg://user?id={target}\">{targetName}</a>, отказался!",
+        "en" : "<a href=\"tg://user?id={target}\">{targetName}</a>, disagree!",
+    },
+    "duel_result" : {
+        "ru" : "<a href=\"tg://user?id={target}\">{targetName}</a>, победил! Выигрыш: {prize}",
+        "en" : "<a href=\"tg://user?id={target}\">{targetName}</a>, won! Prize: {prize}",
+    },
+    "coin_win" : {
+        "ru" : "Вы победили!\nВы получили {cost}$",
+        "en" : "You won!\nYou got {cost}$",
+    },
+    "coin_lose" : {
+        "ru" : "Вы проиграли\nВы потеряли {cost}$",
+        "en" : "You lost\nYou lost {cost}$",
+    },
+    "crash_win" : {
+        "ru" : "Вы победили, коэффициент: {kf:.2f}\nВы получили {cost}$",
+        "en" : "You won, coefficient: {kf:.2f}\nYou got {cost}$",
+    },
+    "crash_lose" : {
+        "ru" : "Вы проиграли, коэффициент: {kf:.2f}\nВы потеряли {cost}$",
+        "en" : "You lost, coefficient: {kf:.2f}\nYou lost {cost}$",
+    },
     "profile_template" : {
-        "ru" : "{fullname}\nID: {user_id}\nЯзык: {language}\nБаланс: {balance}\n\nРесторан \"{restName}\"\nДоход: {restIncome}\nНалоговая задолжность: {restTaxDebt}\nПоследняя смена: {lastActive}\n\nКухня\nКол-во поваров: {kitchenWorkload}\nМакс поваров: {kitchenWorkloadMax}\n\nЗал\nКол-во официантов: {loungeWorkload}\nМакс официантов: {loungeWorkloadMax}",
+        "ru" : "👤{fullname}\n🆔ID: {user_id}\nЯзык: {language}\nБаланс: {balance}\n\nРесторан \"{restName}\"\nДоход: {restIncome}\nНалоговая задолжность: {restTaxDebt}\nПоследняя смена: {lastActive}\n\nКухня\nКол-во поваров: {kitchenWorkload}\nМакс поваров: {kitchenWorkloadMax}\n\nЗал\nКол-во официантов: {loungeWorkload}\nМакс официантов: {loungeWorkloadMax}",
         "en" : "{fullname}\nID: {user_id}\nLanguage: {language}\nBalance: {balance}\n\nRestourant \"{restName}\"\nIncome: {restIncome}\nTax debt: {restTaxDebt}\nLast active: {lastActive}\n\nKitchen\nChiefs count: {kitchenWorkload}\nMax chiefs: {kitchenWorkloadMax}\n\nLounge\nservants count: {loungeWorkload}\nMax servants: {loungeWorkloadMax}",
     },
 }

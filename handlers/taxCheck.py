@@ -34,6 +34,6 @@ async def process_check(message: types.Message, state: FSMContext):
         BotDataBase.change_balance(target_id, -debt)
         BotDataBase.nullify_debt(target_id)
         await message.bot.send_message(target_id, PHRASES["tax_skipped_fail"][BotDataBase.get_user_language(target_id)].format(fine=debt))
-        await message.reply(PHRASES["tax_check_sent"][user_language].format(name=BotDataBase.get_restourant(message.from_id).name))
+        await message.reply(PHRASES["tax_check_sent"][user_language].format(name=BotDataBase.get_restourant(target_id).name, cost=cost))
     else:
         await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(cost)))
