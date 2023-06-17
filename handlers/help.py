@@ -20,9 +20,6 @@ async def process_help(message: types.Message, state: FSMContext):
     args = message.get_args()
 
     if args is not None and args != "":
-        if not args.isalpha():
-            await message.reply(PHRASES["incorrect_command"][user_language].format(command=args))
-            return
         description = BotLocalization.get_command_description(args, user_language)
         if description is None:
             await message.reply(PHRASES["incorrect_command"][user_language].format(command=args))
