@@ -78,12 +78,12 @@ async def process_crash(message: types.Message, state: FSMContext):
     if message.is_command() and message.get_args() is not None:
         args = message.get_args().split()
         if len(args) < 2:
-            await message.reply(PHRASES["incorrect_command"][user_language].format(command=COMMANDS["crash"]["en"]))
+            await message.reply(PHRASES["incorrect_command"][user_language].format(command=COMMANDS["crash"]["us"]))
             return
         cost = int(args[0])
         kf = float(args[1])
         if kf < 1 or kf > 20 or cost < 0:
-            await message.reply(PHRASES["incorrect_command"][user_language].format(command=COMMANDS["crash"]["en"]))
+            await message.reply(PHRASES["incorrect_command"][user_language].format(command=COMMANDS["crash"]["us"]))
             return
 
     if cost <= BotDataBase.get_balance(message.from_id):
