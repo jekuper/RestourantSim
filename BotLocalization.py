@@ -311,7 +311,7 @@ def get_localization_buttons() -> InlineKeyboardMarkup:
         buttons.add(InlineKeyboardButton(LOCALIZATIONS[i], callback_data=LOCALIZATIONS[i]))
     return buttons
 
-def check_command_localization(command : str, message : Message, command_only: bool) -> str | None:
+def check_command_localization(command : str, message : Message, command_only: bool) -> str:
     text = ""
     if message.is_command():
         text = message.get_command(True)
@@ -324,7 +324,7 @@ def check_command_localization(command : str, message : Message, command_only: b
             return key
     return None
 
-def get_command_description(command : str, user_language: str) -> str | None:
+def get_command_description(command : str, user_language: str) -> str:
     cKey = None
     for key, item in COMMANDS.items():
         for language, com in item.items():

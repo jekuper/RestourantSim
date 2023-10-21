@@ -12,7 +12,7 @@ class BotStates(StatesGroup):
 ### data base
 
 HOSTNAME = "127.0.0.1"
-PORT = 3306
-USERNAME = "root"
-PASSWORD = "3i2fWRF8s_x5Cv_"
-DATABASE_NAME = "restaurant_sim"
+PORT = 0
+USERNAME = "dsharipov"
+PASSWORD = "WU6qk85eLWFS6*P"
+DATABASE_NAME = "dsharipov"
