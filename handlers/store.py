@@ -48,7 +48,7 @@ async def process_servant_store(message: types.Message, state: FSMContext):
     prefix = "human_"
     user_language = BotDataBase.get_user_language(message.from_id)
 
-    remove_reply_keyboard(message, user_language)
+    await remove_reply_keyboard(message, user_language)
     
     available_deals = BotDataBase.get_available_human_deals(message.from_id, BotDataBase.job_types.servant)
 
@@ -66,7 +66,7 @@ async def process_chiefs_store(message: types.Message, state: FSMContext):
     prefix = "human_"
     user_language = BotDataBase.get_user_language(message.from_id)
 
-    remove_reply_keyboard(message, user_language)
+    await remove_reply_keyboard(message, user_language)
     
     available_deals = BotDataBase.get_available_human_deals(message.from_id, BotDataBase.job_types.chief)
 
@@ -152,7 +152,7 @@ def recursive_ext_cost(level : int):
 async def process_kitchen_extension(message: types.Message, state: FSMContext):
     user_language = BotDataBase.get_user_language(message.from_id)
 
-    remove_reply_keyboard(message, user_language)
+    await remove_reply_keyboard(message, user_language)
     
     kitchen_stats = BotDataBase.get_kitchen_stats(message.from_id)
 
@@ -161,7 +161,7 @@ async def process_kitchen_extension(message: types.Message, state: FSMContext):
 async def process_lounge_extension(message: types.Message, state: FSMContext):
     user_language = BotDataBase.get_user_language(message.from_id)
 
-    remove_reply_keyboard(message, user_language)
+    await remove_reply_keyboard(message, user_language)
     
     lounge_stats = BotDataBase.get_lounge_stats(message.from_id)
 
