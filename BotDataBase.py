@@ -350,7 +350,8 @@ def change_balance(user_id: int, delta: int):
 #region human deals
 def get_available_human_deals (user_id: int, job_type: job_types) -> list[human_deal]:
     session = Session(bind=engine)
-    deals = session.query(human_deal).filter(human_deal.job_type == job_type, human_deal.minimum_income <= get_income(user_id)).all()
+#    deals = session.query(human_deal).filter(human_deal.job_type == job_type, human_deal.minimum_income <= get_income(user_id)).all()
+    deals = session.query(human_deal).filter(human_deal.job_type == job_type).all()
     return deals
 
 def get_human_deal (id: int) -> human_deal:

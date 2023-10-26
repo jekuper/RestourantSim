@@ -183,6 +183,10 @@ PHRASES = {
         "ru": "❌ Не хватает денег.\n💲 Цена: {price}$",
         "us": "❌ Not enough balance.\n💲 Cost: {price}$"
     },
+    "not_enough_income": {
+        "ru": "❌ Предложение отклонено человеком\n💲 Требуется доход заведения как минимум: {price}$",
+        "us": "❌ Offer declined.\n💲 Minimum income required: {price}$"
+    },
     "not_enough_space": {
         "ru": "❌ Не хватает места. Попробуй расширить заведение",
         "us": "❌ Not enough space. Try extending the building"

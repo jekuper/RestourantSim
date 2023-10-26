@@ -94,6 +94,9 @@ async def process_callback_human_select(callback_query: types.CallbackQuery, sta
     if deal is None:
         await callback_query.message.edit_text(PHRASES["human_deal_not_found"][user_language])
         return
+    if BotDataBase.get_income(callback_query.from_user.id) < deal.minimum_income:
+        await callback_query.message.edit_text(PHRASES["not_enough_income"][user_language].format(price=str(deal.minimum_income))+":\n\n"+get_human_deal_message(deal, user_language), reply_markup=None)
+        return
     
     markup = InlineKeyboardMarkup()
     if BotDataBase.get_balance(callback_query.from_user.id) >= deal.cost:
