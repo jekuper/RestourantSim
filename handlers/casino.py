@@ -86,16 +86,16 @@ async def process_crash(message: types.Message, state: FSMContext):
             await message.reply(PHRASES["incorrect_command"][user_language].format(command=COMMANDS["crash"]["us"]))
             return
 
-    if cost <= BotDataBase.get_balance(message.from_id):
-        BotDataBase.change_balance(message.from_id, -cost)
-        newKf = min(BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20))
-        if newKf > kf:
-            BotDataBase.change_balance(message.from_id, int(cost * kf))
-            await message.reply(PHRASES["crash_win"][user_language].format(cost=int(cost * kf), kf=newKf))
+        if cost <= BotDataBase.get_balance(message.from_id):
+            BotDataBase.change_balance(message.from_id, -cost)
+            newKf = min(BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20))
+            if newKf > kf:
+                BotDataBase.change_balance(message.from_id, int(cost * kf))
+                await message.reply(PHRASES["crash_win"][user_language].format(cost=int(cost * kf), kf=newKf))
+            else:
+                await message.reply(PHRASES["crash_lose"][user_language].format(cost=cost, kf=newKf))
         else:
-            await message.reply(PHRASES["crash_lose"][user_language].format(cost=cost, kf=newKf))
-    else:
-        await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(cost)))
+            await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(cost)))
 
 
 async def process_callback_duel(callback_query: types.CallbackQuery, state: FSMContext):

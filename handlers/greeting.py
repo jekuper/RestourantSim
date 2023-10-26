@@ -43,7 +43,7 @@ async def process_callback_localization(callback_query: types.CallbackQuery, sta
 
 def is_latin_string(s):
     # Define a regular expression pattern to match the allowed characters
-    pattern = r'[a-zA-Z0-9 _а-я]+'
+    pattern = r'[a-zA-Z0-9 _а-яА-Я]+'
 
     # Use the re.match function to check if the string matches the pattern
     if re.match(pattern, s):

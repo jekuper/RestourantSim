@@ -110,8 +110,14 @@ COMMANDS = {
     "crash" : {
         "ru" : "crash",
         "us" : "краш",
-        "desc_ru" : emojize(":chart_increasing: Начинает игру в краш"),
-        "desc_us" : emojize(":chart_increasing: Starts crash game"),
+        "desc_ru" : emojize(":chart_increasing: Начинает игру в краш. \n2 обязательных аргумента: ставка и коеффициент"),
+        "desc_us" : emojize(":chart_increasing: Starts crash game\n 2 required arguments: bet amount and coefficient"),
+    },
+    "transfer" : {
+        "ru" : "transfer",
+        "us" : "перевод",
+        "desc_ru" : emojize("переводи деньги. 2 обязательных аргумента: получатель и сумма"),
+        "desc_us" : emojize("transfers money. 2 required arguments: receiver and amount"),
     },
 }
 PHRASES = {
@@ -132,8 +138,8 @@ PHRASES = {
         "us": "💡 Type a name for your restaurant!"
     },
     "invalidName": {
-        "ru": "🚫 Имя должно включать в себя только латинские буквы и цифры",
-        "us": "🚫 Name must include only Latin characters and numbers"
+        "ru": "🚫 Имя должно включать в себя только латинские буквы или кириллицу, цифры, пробел и _",
+        "us": "🚫 Name must include only Latin characters, cyrillic, numbers, space, _"
     },
     "nameSet": {
         "ru": "✅ Имя успешно установлено\nТеперь тебе нужно нанять свой первый персонал!\n\nОткрыть рынок рабочих - /" + COMMANDS["employment"]["ru"],
@@ -310,6 +316,10 @@ PHRASES = {
     "reply_keyboard_removed": {
         "ru": "👌 Понял + принял",
         "us": "👌 Got you"
+    },
+    "transfer_success": {
+        "ru": "💥 Перевод успешен: \nПолучатель: {target}\nСумма: {amount}$",
+        "us": "💥 Transfer success: \nReceiver: {target}\nAmount {amount}$"
     },
 }
 
