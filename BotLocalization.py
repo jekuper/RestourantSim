@@ -102,22 +102,28 @@ COMMANDS = {
         "desc_us" : emojize(":crossed_swords: Challenges the player to a duel. You need to send a response to the message of the player who is the target"),
     },
     "coin" : {
-        "ru" : "coin",
-        "us" : "монетка",
+        "ru" : "монетка",
+        "us" : "coin",
         "desc_ru" : emojize(":coin: Подбрасывает монетку. Есть шанс удвоить ставку"),
         "desc_us" : emojize(":coin: Flips a coin. There is a chance to double the bet"),
     },
     "crash" : {
-        "ru" : "crash",
-        "us" : "краш",
+        "ru" : "краш",
+        "us" : "crash",
         "desc_ru" : emojize(":chart_increasing: Начинает игру в краш. \n2 обязательных аргумента: ставка и коеффициент"),
         "desc_us" : emojize(":chart_increasing: Starts crash game\n 2 required arguments: bet amount and coefficient"),
     },
     "transfer" : {
-        "ru" : "transfer",
-        "us" : "перевод",
-        "desc_ru" : emojize("переводи деньги. 2 обязательных аргумента: получатель и сумма"),
-        "desc_us" : emojize("transfers money. 2 required arguments: receiver and amount"),
+        "ru" : "перевод",
+        "us" : "transfer",
+        "desc_ru" : emojize("переводи деньги. \n2 обязательных аргумента: получатель и сумма"),
+        "desc_us" : emojize("transfers money. \n2 required arguments: receiver and amount"),
+    },
+    "name" : {
+        "ru" : "имя",
+        "us" : "name",
+        "desc_ru" : emojize("Смена имени ресторана"),
+        "desc_us" : emojize("Changes restourant's name"),
     },
 }
 PHRASES = {
