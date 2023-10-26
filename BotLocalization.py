@@ -115,197 +115,197 @@ COMMANDS = {
     },
 }
 PHRASES = {
-    "default_help" : {
-        "ru" : "Станьте виртуальным владельцем ресторана с помощью \"Ресто-мастер\" - увлекательного телеграм бота! Управляйте меню, обучайте персонал, привлекайте клиентов и развивайте свой ресторан.",
-        "us" : "Become a virtual restaurant owner with \"Resto-Master\" - an engaging Telegram bot! Manage menus, train staff, attract customers, and grow your restaurant.",
+    "default_help": {
+        "ru": "🍽️ Станьте виртуальным владельцем ресторана с помощью \"Ресто-мастер\" - увлекательного телеграм бота! Управляйте меню, обучайте персонал, привлекайте клиентов и развивайте свой ресторан.",
+        "us": "🍽️ Become a virtual restaurant owner with \"Resto-Master\" - an engaging Telegram bot! Manage menus, train staff, attract customers, and grow your restaurant."
     },
-    "languageChange" : {
-        "ru" : "Язык успешно изменён на Русский",
-        "us" : "Language changed successfully to English",
+    "languageChange": {
+        "ru": "🌐 Язык успешно изменён на Русский",
+        "us": "🌐 Language changed successfully to English"
     },
-    "greeting" : {
-        "ru" : "Привет!\nВ этом боте ты можешь создать свой собственный ресторан с нуля, а также соревноваться со своими друзьями",
-        "us" : "Hi! In this bot you can create your own restourant",
+    "greeting": {
+        "ru": "👋 Привет!\nВ этом боте ты можешь создать свой собственный ресторан с нуля, а также соревноваться со своими друзьями",
+        "us": "👋 Hi! In this bot you can create your own restaurant"
     },
-    "selectName" :{
-        "ru" : "Выбери имя для своего ресторана!",
-        "us" : "Type name for your restaurant!",
+    "selectName": {
+        "ru": "💡 Выбери имя для своего ресторана!",
+        "us": "💡 Type a name for your restaurant!"
     },
-    "invalidName" :{
-        "ru" : "Имя должно включать себя только латинские буквы и цифры",
-        "us" : "Name must include only latin characters and numbers",
+    "invalidName": {
+        "ru": "🚫 Имя должно включать в себя только латинские буквы и цифры",
+        "us": "🚫 Name must include only Latin characters and numbers"
     },
-    "nameSet" :{
-        "ru" : "Имя успешно установлено\nТеперь тебе нужно нанять свой первый персонал!\n\nОткрыть рынок рабочих - /"+COMMANDS["employment"]["ru"],
-        "us" : "Name set successfully/\nNow you need to hire new employees!\n\nOpen store - /"+COMMANDS["employment"]["us"],
+    "nameSet": {
+        "ru": "✅ Имя успешно установлено\nТеперь тебе нужно нанять свой первый персонал!\n\nОткрыть рынок рабочих - /" + COMMANDS["employment"]["ru"],
+        "us": "✅ Name set successfully/\nNow you need to hire new employees!\n\nOpen store - /" + COMMANDS["employment"]["us"]
     },
-    "storeCategory" :{
-        "ru" : "Выбери категорию покупки",
-        "us" : "Select shop category",
+    "storeCategory": {
+        "ru": "🛒 Выбери категорию покупки",
+        "us": "🛒 Select shop category"
     },
-    "selectChiefStore" :{
-        "ru" : "Выбери повара которого хотите нанять",
-        "us" : "Select chief to hire",
+    "selectChiefStore": {
+        "ru": "👩‍🍳 Выбери повара, которого хотите нанять",
+        "us": "👩‍🍳 Select a chef to hire"
     },
-    "selectServantStore" :{
-        "ru" : "Выбери официанта которого хотите нанять",
-        "us" : "Select servant to hire",
+    "selectServantStore": {
+        "ru": "👩‍🍳 Выбери официанта, которого хотите нанять",
+        "us": "👩‍🍳 Select a servant to hire"
     },
-    "human_deal_not_found" :{
-        "ru" : "Такая сделка больше не существует",
-        "us" : "Selected deal no longer exists",
+    "human_deal_not_found": {
+        "ru": "❌ Такая сделка больше не существует",
+        "us": "❌ Selected deal no longer exists"
     },
-    "deal_confirmation" :{
-        "ru" : "Хочешь купить?",
-        "us" : "Do you agree to buy?",
+    "deal_confirmation": {
+        "ru": "🤝 Хочешь купить?",
+        "us": "🤝 Do you agree to buy?"
     },
-    "agree" :{
-        "ru" : "Согласен",
-        "us" : "Agree",
+    "agree": {
+        "ru": "✅ Согласен",
+        "us": "✅ Agree"
     },
-    "disagree" :{
-        "ru" : "Не согласен",
-        "us" : "Disagree",
+    "disagree": {
+        "ru": "❌ Не согласен",
+        "us": "❌ Disagree"
     },
-    "income" :{
-        "ru" : "прибыль",
-        "us" : "income",
+    "income": {
+        "ru": "💰 прибыль",
+        "us": "💰 income"
     },
-    "cost" :{
-        "ru" : "цена",
-        "us" : "cost",
+    "cost": {
+        "ru": "💲 цена",
+        "us": "💲 cost"
     },
-    "job_type" :{
-        "ru" : "Должность",
-        "us" : "Job",
+    "job_type": {
+        "ru": "👨‍🍳 Должность",
+        "us": "👨‍🍳 Job"
     },
-    "not_enough_balance" :{
-        "ru" : "Не хватает денег.\nЦена: {price}$",
-        "us" : "Not enough balance.\nCost: {price}$",
+    "not_enough_balance": {
+        "ru": "❌ Не хватает денег.\n💲 Цена: {price}$",
+        "us": "❌ Not enough balance.\n💲 Cost: {price}$"
     },
-    "not_enough_space" :{
-        "ru" : "Не хватает пространтсва. Попробуй расширить заведение",
-        "us" : "Not enough space. Try extending building",
+    "not_enough_space": {
+        "ru": "❌ Не хватает места. Попробуй расширить заведение",
+        "us": "❌ Not enough space. Try extending the building"
     },
-    "successful_deal" :{
-        "ru" : "Успешная покупка",
-        "us" : "Bought successfully",
+    "successful_deal": {
+        "ru": "✅ Успешная покупка",
+        "us": "✅ Bought successfully"
     },
-    "extension_category" :{
-        "ru" : "Выбери что хочешь расширить",
-        "us" : "Select extension",
+    "extension_category": {
+        "ru": "🔍 Выбери, что хочешь расширить",
+        "us": "🔍 Select extension"
     },
-    "k_stats" : {
-        "ru" : "текущая вместимость кухни - ",
-        "us" : "current kitchen workload - ",
+    "k_stats": {
+        "ru": "🍳 Текущая вместимость кухни - ",
+        "us": "🍳 Current kitchen workload - "
     },
-    "k_tip" : {
-        "ru" : "Используй /"+COMMANDS["extend_kitchen"]["ru"]+" для расширения кухни",
-        "us" : "Use /"+COMMANDS["extend_kitchen"]["us"]+" to extend kitchen",
+    "k_tip": {
+        "ru": "Используй /"+COMMANDS["extend_kitchen"]["ru"]+" для расширения кухни",
+        "us": "Use /"+COMMANDS["extend_kitchen"]["us"]+" to extend the kitchen"
     },
-    "l_stats" : {
-        "ru" : "текущая вместимость зала - ",
-        "us" : "current restourant lounge workload - ",
+    "l_stats": {
+        "ru": "🍽️ Текущая вместимость зала - ",
+        "us": "🍽️ Current restaurant lounge workload - "
     },
-    "l_tip" : {
-        "ru" : "Используй /"+COMMANDS["extend_lounge"]["ru"]+" для расширения зала",
-        "us" : "Use /"+COMMANDS["extend_lounge"]["us"]+" to extend lounge",
+    "l_tip": {
+        "ru": "Используй /"+COMMANDS["extend_lounge"]["ru"]+" для расширения зала",
+        "us": "Use /"+COMMANDS["extend_lounge"]["us"]+" to extend the lounge"
     },
-    "ext_cost" : {
-        "ru" : "Цена расширения",
-        "us" : "Extension cost",
+    "ext_cost": {
+        "ru": "💲 Цена расширения",
+        "us": "💲 Extension cost"
     },
-    "shift_processed" : {
-        "ru" : "Смена отработа успешно!\n\n--------\nЗаработано: {income}\nРасходы из-за дебоша: {damage}\n\nЧистая прибыль: {profit}",
-        "us" : "Day ended!\n\n--------\nIncome: {income}\nBrawl damage: {damage}\n\nNet profit: {profit}",
+    "shift_processed": {
+        "ru": "✅ Смена отработала успешно!\n\n💰 Заработано: {income}\n💥 Расходы из-за дебоша: {damage}\n\n💵 Чистая прибыль: {profit}",
+        "us": "✅ Day ended!\n\n💰 Income: {income}\n💥 Brawl damage: {damage}\n\n💵 Net profit: {profit}"
     },
-    "cant_start_shift" : {
-        "ru" : "Персоналу требуется отдых!\nНачать работу можно через {hours}ч. {minutes}мин.",
-        "us" : "Staff need rest!\nThe next shift is in {hours}h. {minutes}min.",
+    "cant_start_shift": {
+        "ru": "⏰ Персоналу требуется отдых!\nНачать работу можно через {hours}ч. {minutes}мин.",
+        "us": "⏰ Staff needs rest!\nThe next shift is in {hours}h. {minutes}min."
     },
-    "tax_paying" : {
-        "ru" : "Хотите оплатить налоги?\nСумма: {tax}",
-        "us" : "Staff need rest!\nThe next shift is in {hours}h. {minutes}min.",
+    "tax_paying": {
+        "ru": "💸 Хотите оплатить налоги?\nСумма: {tax}",
+        "us": "💸 Want to pay taxes?\nAmount: {tax}"
     },
-    "tax_paid" : {
-        "ru" : "Налоги оплачены в размере {tax}$!",
-        "us" : "Taxes are paid. \nAmount: {tax}",
+    "tax_paid": {
+        "ru": "✅ Налоги оплачены в размере {tax}$!",
+        "us": "✅ Taxes are paid. \nAmount: {tax}"
     },
-    "tax_skipped_suc" : {
-        "ru" : "Ты успешно уклонился от налогов",
-        "us" : "You skipped taxes",
+    "tax_skipped_suc": {
+        "ru": "🙅‍♂️ Ты успешно уклонился от налогов",
+        "us": "🙅‍♂️ You skipped taxes"
     },
-    "tax_skipped_fail" : {
-        "ru" : "Тебя накрыла налоговая проверка. Ты заплатили за все свои уклонения: {fine}$",
-        "us" : "You got caught on a tax check. You paid for all schemas: {fine}$",
+    "tax_skipped_fail": {
+        "ru": "🚔 Тебя накрыла налоговая проверка. Ты заплатил за все свои уклонения: {fine}$",
+        "us": "🚔 You got caught in a tax check. You paid for all your evasions: {fine}$"
     },
-    "tax_check_sent" : {
-        "ru" : "Проверка подкуплена и уже направляется к ресторану \"{name}\". За проверку заплачено: {cost}$",
-        "us" : "Tax check has been sent to restourant \"{name}\". You paid: {cost}$",
+    "tax_check_sent": {
+        "ru": "📋 Проверка подкуплена и уже направляется к ресторану \"{name}\". За проверку заплачено: {cost}$",
+        "us": "📋 Tax check has been sent to restaurant \"{name}\". You paid: {cost}$"
     },
-    "user_not_exist" : {
-        "ru" : "Такого пользователя не существует",
-        "us" : "User doesn't exist",
+    "user_not_exist": {
+        "ru": "❌ Такого пользователя не существует",
+        "us": "❌ User doesn't exist"
     },
-    "you_not_target" : {
-        "ru" : "Ты не цель.\nТолько цель может взаимодействовать с этим сообщением!",
-        "us" : "You are not target.\nOnly target can interact with message!",
+    "you_not_target": {
+        "ru": "🎯 Ты не цель. Только цель может взаимодействовать с этим сообщением!",
+        "us": "🎯 You are not the target. Only the target can interact with this message!"
     },
-    "provide_reply" : {
-        "ru" : "Чтобы использовать эту команду, надо отправить её ответом на чьё-либо сообщение",
-        "us" : "Use this command as a reply to somebodies message",
+    "provide_reply": {
+        "ru": "📨 Чтобы использовать эту команду, надо отправить её ответом на чьё-либо сообщение",
+        "us": "📨 Use this command as a reply to somebody's message"
     },
-    "brawl_level_increased" : {
-        "ru" : "Бомжи наняты и уже движутся к ресторану \"{name}\".\nТвоего конкурента ждёт неприятная смена!\nУбытков будет примерно на {cost}$",
-        "us" : "Brawlers are hired and already in \"{name}\".\nIt would be bad day for your opponent!\nLosses will be approximately at {cost}$",
+    "brawl_level_increased": {
+        "ru": "👊 Бомжи наняты и уже движутся к ресторану \"{name}\".\nТвоего конкурента ждёт неприятная смена!\nУбытков будет примерно на {cost}$",
+        "us": "👊 Brawlers are hired and already in \"{name}\".\nIt will be a bad day for your opponent!\nLosses will be approximately at {cost}$"
     },
-    "incorrect_command" : {
-        "ru" : "Команда \"{command}\" не найдена или введена не верно",
-        "us" : "Command \"{command}\" not found or not enough arguments provided",
+    "incorrect_command": {
+        "ru": "❓ Команда \"{command}\" не найдена или введена неверно",
+        "us": "❓ Command \"{command}\" not found or not enough arguments provided"
     },
-    "brawl_self" : {
-        "ru" : "Глупо заказывать дебош в свой же ресторан!",
-        "us" : "You can't order a brawl in your own restourant!",
+    "brawl_self": {
+        "ru": "🤦‍♂️ Глупо заказывать драку в своем же ресторане!",
+        "us": "🤦‍♂️ You can't order a brawl in your own restaurant!"
     },
-    "duel_self" : {
-        "ru" : "Нельзя бросать дуэль самому себе!",
-        "us" : "You can't duel yourself!",
+    "duel_self": {
+        "ru": "🤦‍♂️ Нельзя бросать дуэль самому себе!",
+        "us": "🤦‍♂️ You can't duel yourself!"
     },
-    "duel_check" : {
-        "ru" : "<a href=\"tg://user?id={target}\">{targetName}</a>, вы принимаете игру с <a href=\"tg://user?id={initiator}\">{initiatorName}</a> на {cost}$?",
-        "us" : "<a href=\"tg://user?id={target}\">{targetName}</a>, do you accept duel from <a href=\"tg://user?id={initiator}\">{initiatorName}</a> for {cost}$?",
+    "duel_check": {
+        "ru": "🤺 <a href=\"tg://user?id={target}\">{targetName}</a>, принимаете ли вы вызов от <a href=\"tg://user?id={initiator}\">{initiatorName}</a> на сумму {cost}$?",
+        "us": "🤺 <a href=\"tg://user?id={target}\">{targetName}</a>, do you accept a duel challenge from <a href=\"tg://user?id={initiator}\">{initiatorName}</a> for {cost}$?"
     },
-    "duel_disagree" : {
-        "ru" : "<a href=\"tg://user?id={target}\">{targetName}</a>, отказался!",
-        "us" : "<a href=\"tg://user?id={target}\">{targetName}</a>, disagree!",
+    "duel_disagree": {
+        "ru": "🤷‍♂️ <a href=\"tg://user?id={target}\">{targetName}</a>, отказался!",
+        "us": "🤷‍♂️ <a href=\"tg://user?id={target}\">{targetName}</a>, disagreed!"
     },
-    "duel_result" : {
-        "ru" : "<a href=\"tg://user?id={target}\">{targetName}</a>, победил! Выигрыш: {prize}",
-        "us" : "<a href=\"tg://user?id={target}\">{targetName}</a>, won! Prize: {prize}",
+    "duel_result": {
+        "ru": "🎉 <a href=\"tg://user?id={target}\">{targetName}</a>, победил! Выигрыш: {prize}",
+        "us": "🎉 <a href=\"tg://user?id={target}\">{targetName}</a>, won! Prize: {prize}"
     },
-    "coin_win" : {
-        "ru" : "Вы победили!\nВы получили {cost}$",
-        "us" : "You won!\nYou got {cost}$",
+    "coin_win": {
+        "ru": "🤑 Вы победили!\nВы получили {cost}$",
+        "us": "🤑 You won!\nYou got {cost}$"
     },
-    "coin_lose" : {
-        "ru" : "Вы проиграли\nВы потеряли {cost}$",
-        "us" : "You lost\nYou lost {cost}$",
+    "coin_lose": {
+        "ru": "😞 Вы проиграли\nВы потеряли {cost}$",
+        "us": "😞 You lost\nYou lost {cost}$"
     },
-    "crash_win" : {
-        "ru" : "Вы победили, коэффициент: {kf:.2f}\nВы получили {cost}$",
-        "us" : "You won, coefficient: {kf:.2f}\nYou got {cost}$",
+    "crash_win": {
+        "ru": "🤑 Вы победили, коэффициент: {kf:.2f}\nВы получили {cost}$",
+        "us": "🤑 You won, coefficient: {kf:.2f}\nYou got {cost}$"
     },
-    "crash_lose" : {
-        "ru" : "Вы проиграли, коэффициент: {kf:.2f}\nВы потеряли {cost}$",
-        "us" : "You lost, coefficient: {kf:.2f}\nYou lost {cost}$",
+    "crash_lose": {
+        "ru": "💥 Вы проиграли, коэффициент: {kf:.2f}\nВы потеряли {cost}$",
+        "us": "💥 You lost, coefficient: {kf:.2f}\nYou lost {cost}$"
     },
-    "profile_template" : {
-        "ru" : "👤{fullname}\n🆔ID: {user_id}\nЯзык: {language}\nБаланс: {balance}\n\nРесторан \"{restName}\"\nДоход: {restIncome}\nНалоговая задолжность: {restTaxDebt}\nПоследняя смена: {lastActive}\n\nКухня\nКол-во поваров: {kitchenWorkload}\nМакс поваров: {kitchenWorkloadMax}\n\nЗал\nКол-во официантов: {loungeWorkload}\nМакс официантов: {loungeWorkloadMax}",
-        "us" : "{fullname}\nID: {user_id}\nLanguage: {language}\nBalance: {balance}\n\nRestourant \"{restName}\"\nIncome: {restIncome}\nTax debt: {restTaxDebt}\nLast active: {lastActive}\n\nKitchen\nChiefs count: {kitchenWorkload}\nMax chiefs: {kitchenWorkloadMax}\n\nLounge\nservants count: {loungeWorkload}\nMax servants: {loungeWorkloadMax}",
+    "profile_template": {
+        "ru": "👤{fullname}\n🆔ID: {user_id}\n🌐 Язык: {language}\n💰 Баланс: {balance}\n\n🍽️ Ресторан \"{restName}\"\n💰 Доход: {restIncome}\n📋 Налоговая задолженность: {restTaxDebt}\n🕒 Последняя смена: {lastActive}\n\n👨‍🍳 Кухня\n👨‍🍳 Количество поваров: {kitchenWorkload}\n👨‍🍳 Максимальное количество поваров: {kitchenWorkloadMax}\n\n🍽️ Зал\n👩‍🍳 Количество официантов: {loungeWorkload}\n👩‍🍳 Максимальное количество официантов: {loungeWorkloadMax}",
+        "us": "👤{fullname}\n🆔ID: {user_id}\n🌐 Language: {language}\n💰 Balance: {balance}\n\n🍽️ Restaurant \"{restName}\"\n💰 Income: {restIncome}\n📋 Tax debt: {restTaxDebt}\n🕒 Last active: {lastActive}\n\n👨‍🍳 Kitchen\n👨‍🍳 Chiefs count: {kitchenWorkload}\n👨‍🍳 Max chiefs: {kitchenWorkloadMax}\n\n🍽️ Lounge\n👩‍🍳 Servants count: {loungeWorkload}\n👩‍🍳 Max servants: {loungeWorkloadMax}"
     },
-    "reply_keyboard_removed" : {
-        "ru" : "Понял + принял",
-        "us" : "Got you",
+    "reply_keyboard_removed": {
+        "ru": "👌 Понял + принял",
+        "us": "👌 Got you"
     },
 }
 
