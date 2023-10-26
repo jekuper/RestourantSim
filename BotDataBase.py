@@ -1,4 +1,4 @@
-from BotConfigs import HOSTNAME, PORT, USERNAME, PASSWORD, DATABASE_NAME
+from BotConfigs import HOSTNAME, PORT, USERNAME, PASSWORD, DATABASE_NAME, SOCKET_LOCATION
 from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, Integer, BigInteger, Enum, String, DateTime, \
@@ -66,7 +66,11 @@ def random_float(minInclusive, maxInclusive) -> float:
 
 def Connect() -> Engine:
     global engine
-    engine = create_engine("mysql+mysqldb://"+USERNAME+":"+PASSWORD+"@"+HOSTNAME+":"+str(PORT)+"/"+DATABASE_NAME, pool_size=10, pool_pre_ping=True)
+
+    if SOCKET_LOCATION is None:
+        engine = create_engine(f"mysql+mysqldb://{USERNAME}:{PASSWORD}@{HOSTNAME}:{str(PORT)}/{DATABASE_NAME}", pool_size=10, pool_pre_ping=True)
+    else:
+        engine = create_engine(f"mysql+mysqldb://{USERNAME}:{PASSWORD}@{HOSTNAME}/{DATABASE_NAME}?unix_socket={SOCKET_LOCATION}", pool_size=10, pool_pre_ping=True)
     
     return engine
 def insert_new_user(user_id: int) -> bool:

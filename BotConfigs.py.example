@@ -1,0 +1,19 @@
+from aiogram.dispatcher.filters.state import State, StatesGroup
+
+TOKEN = "your telegram token"
+
+class BotStates(StatesGroup):
+    FIRST_LANGUAGE_SWITCH = State()
+    LANGUAGE_SWITCH = State()
+    SELECTING_NAME = State()
+    FIRST_WORKER = State()
+    COMPLETING_DEAL = State()
+
+### data base
+
+HOSTNAME = "127.0.0.1"
+PORT = 3306
+USERNAME = "root"
+PASSWORD = "password"
+DATABASE_NAME = "name"
+SOCKET_LOCATION = None #put unix socket location if needed - "/var/run/mysql/mysql.sock"

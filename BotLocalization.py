@@ -303,6 +303,10 @@ PHRASES = {
         "ru" : "👤{fullname}\n🆔ID: {user_id}\nЯзык: {language}\nБаланс: {balance}\n\nРесторан \"{restName}\"\nДоход: {restIncome}\nНалоговая задолжность: {restTaxDebt}\nПоследняя смена: {lastActive}\n\nКухня\nКол-во поваров: {kitchenWorkload}\nМакс поваров: {kitchenWorkloadMax}\n\nЗал\nКол-во официантов: {loungeWorkload}\nМакс официантов: {loungeWorkloadMax}",
         "us" : "{fullname}\nID: {user_id}\nLanguage: {language}\nBalance: {balance}\n\nRestourant \"{restName}\"\nIncome: {restIncome}\nTax debt: {restTaxDebt}\nLast active: {lastActive}\n\nKitchen\nChiefs count: {kitchenWorkload}\nMax chiefs: {kitchenWorkloadMax}\n\nLounge\nservants count: {loungeWorkload}\nMax servants: {loungeWorkloadMax}",
     },
+    "reply_keyboard_removed" : {
+        "ru" : "Понял + принял",
+        "us" : "Got you",
+    },
 }
 
 def get_localization_buttons() -> InlineKeyboardMarkup:
@@ -311,7 +315,7 @@ def get_localization_buttons() -> InlineKeyboardMarkup:
         buttons.add(InlineKeyboardButton(LOCALIZATIONS[i], callback_data=LOCALIZATIONS[i]))
     return buttons
 
-def check_command_localization(command : str, message : Message, command_only: bool) -> str | None:
+def check_command_localization(command : str, message : Message, command_only: bool) -> str:
     text = ""
     if message.is_command():
         text = message.get_command(True)
@@ -324,7 +328,7 @@ def check_command_localization(command : str, message : Message, command_only: b
             return key
     return None
 
-def get_command_description(command : str, user_language: str) -> str | None:
+def get_command_description(command : str, user_language: str) -> str:
     cKey = None
     for key, item in COMMANDS.items():
         for language, com in item.items():

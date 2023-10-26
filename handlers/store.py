@@ -4,7 +4,7 @@ import BotLocalization
 from BotConfigs import BotStates
 import BotDataBase
 from aiogram.dispatcher import FSMContext
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 import handlers.common as common
 from BotLocalization import COMMANDS, PHRASES
 
@@ -25,11 +25,15 @@ def register_handlers(dpG: Dispatcher):
     if common.dp is None:
         common.dp = dpG
 
+async def remove_reply_keyboard(message: types.Message, user_language):
+    markup = ReplyKeyboardRemove(selective=True)
+    await message.reply(PHRASES["reply_keyboard_removed"][user_language], reply_markup=markup)
+
 #region human deals
 async def process_category(message: types.Message, state: FSMContext):
     await state.reset_state()
 
-    categorySelection = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    categorySelection = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True, selective=True)
     user_language = BotDataBase.get_user_language(message.from_id)
     
     chiefs_button = KeyboardButton(COMMANDS["chiefs"][user_language])
@@ -43,6 +47,8 @@ async def process_servant_store(message: types.Message, state: FSMContext):
     servantsList = InlineKeyboardMarkup()
     prefix = "human_"
     user_language = BotDataBase.get_user_language(message.from_id)
+
+    remove_reply_keyboard(message, user_language)
     
     available_deals = BotDataBase.get_available_human_deals(message.from_id, BotDataBase.job_types.servant)
 
@@ -59,6 +65,8 @@ async def process_chiefs_store(message: types.Message, state: FSMContext):
     chiefsList = InlineKeyboardMarkup()
     prefix = "human_"
     user_language = BotDataBase.get_user_language(message.from_id)
+
+    remove_reply_keyboard(message, user_language)
     
     available_deals = BotDataBase.get_available_human_deals(message.from_id, BotDataBase.job_types.chief)
 
@@ -143,6 +151,8 @@ def recursive_ext_cost(level : int):
 
 async def process_kitchen_extension(message: types.Message, state: FSMContext):
     user_language = BotDataBase.get_user_language(message.from_id)
+
+    remove_reply_keyboard(message, user_language)
     
     kitchen_stats = BotDataBase.get_kitchen_stats(message.from_id)
 
@@ -150,6 +160,8 @@ async def process_kitchen_extension(message: types.Message, state: FSMContext):
 
 async def process_lounge_extension(message: types.Message, state: FSMContext):
     user_language = BotDataBase.get_user_language(message.from_id)
+
+    remove_reply_keyboard(message, user_language)
     
     lounge_stats = BotDataBase.get_lounge_stats(message.from_id)
 
