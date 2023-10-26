@@ -1,3 +1,4 @@
+import re
 from aiogram.dispatcher import Dispatcher
 from aiogram import types
 import BotLocalization
@@ -40,8 +41,18 @@ async def process_callback_localization(callback_query: types.CallbackQuery, sta
     else:
         await state.finish()
 
+def is_latin_string(s):
+    # Define a regular expression pattern to match the allowed characters
+    pattern = r'[a-zA-Z0-9 _а-я]+'
+
+    # Use the re.match function to check if the string matches the pattern
+    if re.match(pattern, s):
+        return True
+    else:
+        return False
+
 async def process_restaurant_name(message: types.Message, state: FSMContext):
-    if not message.text.isalnum():
+    if not is_latin_string(message.text):
         await message.reply(BotLocalization.PHRASES["invalidName"][BotDataBase.get_user_language(message.from_id)])
         return
     
