@@ -53,11 +53,14 @@ def is_latin_string(s):
         return False
 
 async def process_restaurant_name(message: types.Message, state: FSMContext):
-    if not is_latin_string(message.text):
+    name = message.text
+    if message.is_command():
+        name = message.get_args()
+    if not is_latin_string(name):
         await message.reply(BotLocalization.PHRASES["invalidName"][BotDataBase.get_user_language(message.from_id)])
         return
     
-    BotDataBase.set_restourant_name(message.from_id, message.text)
+    BotDataBase.set_restourant_name(message.from_id, name)
     await message.reply(BotLocalization.PHRASES["nameSet"][BotDataBase.get_user_language(message.from_id)])
     await state.set_state(BotStates.FIRST_WORKER)
     await state.finish()
