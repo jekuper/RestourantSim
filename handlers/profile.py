@@ -57,5 +57,6 @@ async def process_transfer(message: types.Message, state: FSMContext):
             BotDataBase.change_balance(message.from_id, -amount)
             BotDataBase.change_balance(target, amount)
             await message.reply(PHRASES["transfer_success"][user_language].format(amount=amount, target=target))
+            await message.bot.send_message(target, PHRASES["transfer_received"][BotDataBase.get_user_language(target)].format(sender=message.from_id, amount=amount))
         else:
             await message.reply(PHRASES["not_enough_balance"][user_language].format(price=str(amount)))

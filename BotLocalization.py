@@ -316,8 +316,8 @@ PHRASES = {
         "us": "💥 You lost, coefficient: {kf:.2f}\nYou lost {cost}$"
     },
     "profile_template": {
-        "ru": "👤{fullname}\n🆔ID: {user_id}\n🌐 Язык: {language}\n💰 Баланс: {balance}\n\n🍽️ Ресторан \"{restName}\"\n💰 Доход: {restIncome}\n📋 Налоговая задолженность: {restTaxDebt}\n🕒 Последняя смена: {lastActive}\n\n👨‍🍳 Кухня\n👨‍🍳 Количество поваров: {kitchenWorkload}\n👨‍🍳 Максимальное количество поваров: {kitchenWorkloadMax}\n\n🍽️ Зал\n👩‍🍳 Количество официантов: {loungeWorkload}\n👩‍🍳 Максимальное количество официантов: {loungeWorkloadMax}",
-        "us": "👤{fullname}\n🆔ID: {user_id}\n🌐 Language: {language}\n💰 Balance: {balance}\n\n🍽️ Restaurant \"{restName}\"\n💰 Income: {restIncome}\n📋 Tax debt: {restTaxDebt}\n🕒 Last active: {lastActive}\n\n👨‍🍳 Kitchen\n👨‍🍳 Chiefs count: {kitchenWorkload}\n👨‍🍳 Max chiefs: {kitchenWorkloadMax}\n\n🍽️ Lounge\n👩‍🍳 Servants count: {loungeWorkload}\n👩‍🍳 Max servants: {loungeWorkloadMax}"
+        "ru": "👤{fullname}\n🆔ID: <code>{user_id}</code>\n🌐 Язык: {language}\n💰 Баланс: {balance}\n\n🍽️ Ресторан \"{restName}\"\n💰 Доход: {restIncome}\n📋 Налоговая задолженность: {restTaxDebt}\n🕒 Последняя смена: {lastActive}\n\n👨‍🍳 Кухня\n👨‍🍳 Количество поваров: {kitchenWorkload}\n👨‍🍳 Максимальное количество поваров: {kitchenWorkloadMax}\n\n🍽️ Зал\n👩‍🍳 Количество официантов: {loungeWorkload}\n👩‍🍳 Максимальное количество официантов: {loungeWorkloadMax}",
+        "us": "👤{fullname}\n🆔ID: <code>{user_id}</code>\n🌐 Language: {language}\n💰 Balance: {balance}\n\n🍽️ Restaurant \"{restName}\"\n💰 Income: {restIncome}\n📋 Tax debt: {restTaxDebt}\n🕒 Last active: {lastActive}\n\n👨‍🍳 Kitchen\n👨‍🍳 Chiefs count: {kitchenWorkload}\n👨‍🍳 Max chiefs: {kitchenWorkloadMax}\n\n🍽️ Lounge\n👩‍🍳 Servants count: {loungeWorkload}\n👩‍🍳 Max servants: {loungeWorkloadMax}"
     },
     "reply_keyboard_removed": {
         "ru": "👌 Понял + принял",
@@ -326,6 +326,10 @@ PHRASES = {
     "transfer_success": {
         "ru": "💥 Перевод успешен: \nПолучатель: {target}\nСумма: {amount}$",
         "us": "💥 Transfer success: \nReceiver: {target}\nAmount {amount}$"
+    },
+    "transfer_received": {
+        "ru": "🤑 Получен перевод от <code>{sender}</code>: {amount}$",
+        "us": "🤑 Transfer received from <code>{sender}</code>: {amount}$"
     },
 }
 
