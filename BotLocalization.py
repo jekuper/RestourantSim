@@ -276,8 +276,8 @@ PHRASES = {
         "us": "👊 Brawlers are hired and already in \"{name}\".\nIt will be a bad day for your opponent!\nLosses will be approximately at {cost}$"
     },
     "incorrect_command": {
-        "ru": "❓ Команда \"{command}\" не найдена или введена неверно",
-        "us": "❓ Command \"{command}\" not found or not enough arguments provided"
+        "ru": "❓ Команда \"{command}\" введена неверно",
+        "us": "❓ Command \"{command}\", not enough arguments provided"
     },
     "brawl_self": {
         "ru": "🤦‍♂️ Глупо заказывать драку в своем же ресторане!",
