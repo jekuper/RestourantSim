@@ -3,6 +3,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
+from common import ThrottlingMiddleware
 
 from handlers import greeting, store, profile, dayShift, taxCheck, brawlOrder, help, casino
 
@@ -17,7 +18,7 @@ bot = Bot(token=TOKEN, parse_mode="HTML")
 storage = MemoryStorage()
 dispatcher = Dispatcher(bot, storage=storage)
 
-dispatcher.middleware.setup(LoggingMiddleware())
+dispatcher.middleware.setup(ThrottlingMiddleware(5))
 
 greeting.register_handlers(dispatcher)
 store.register_handlers(dispatcher)
