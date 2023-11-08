@@ -198,6 +198,12 @@ def get_workers(user_id: int) -> list[int]:
     if workers is None:
         return None
     return json.loads(workers[0])
+def workers_to_string(employees: list[int]) -> list[str]:
+    session = Session(bind=engine)
+    result = session.query(func.concat(human_deal.name, " ", human_deal.last_name)).filter(human_deal.id.in_(employees)).all()
+    if result is None:
+        return None
+    return json.loads(result)
 def set_workers(user_id: int, new_list: list[int]):
     session = Session(bind=engine)
     rest = session.query(restourant).filter(restourant.user_id==user_id).first()

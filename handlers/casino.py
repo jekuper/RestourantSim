@@ -61,7 +61,7 @@ async def process_coin(message: types.Message, state: FSMContext):
         cost = int(message.get_args())
 
     if cost <= BotDataBase.get_balance(message.from_id):
-        if BotDataBase.bool_based_on_probability():
+        if BotDataBase.bool_based_on_probability(0.3):
             BotDataBase.change_balance(message.from_id, cost)
             await message.reply(PHRASES["coin_win"][user_language].format(cost=cost))
         else:
@@ -88,7 +88,7 @@ async def process_crash(message: types.Message, state: FSMContext):
 
         if cost <= BotDataBase.get_balance(message.from_id):
             BotDataBase.change_balance(message.from_id, -cost)
-            newKf = min(BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20), BotDataBase.random_float(1, 20))
+            newKf = min(BotDataBase.random_float(1, 10), BotDataBase.random_float(1, 10), BotDataBase.random_float(1, 10), BotDataBase.random_float(1, 10))
             if newKf > kf:
                 BotDataBase.change_balance(message.from_id, int(cost * kf))
                 await message.reply(PHRASES["crash_win"][user_language].format(cost=int(cost * kf), kf=newKf))

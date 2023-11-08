@@ -125,6 +125,12 @@ COMMANDS = {
         "desc_ru" : emojize("Смена имени ресторана"),
         "desc_us" : emojize("Changes restourant's name"),
     },
+    "human_info" : {
+        "ru" : "работники",
+        "us" : "employees",
+        "desc_ru" : emojize("Выводит данные о нанятом персонале ресторана"),
+        "desc_us" : emojize("Prints info about employees"),
+    },
 }
 PHRASES = {
     "default_help": {
@@ -316,8 +322,8 @@ PHRASES = {
         "us": "💥 You lost, coefficient: {kf:.2f}\nYou lost {cost}$"
     },
     "profile_template": {
-        "ru": "👤{fullname}\n🆔ID: <code>{user_id}</code>\n🌐 Язык: {language}\n💰 Баланс: {balance}\n\n🍽️ Ресторан \"{restName}\"\n💰 Доход: {restIncome}\n📋 Налоговая задолженность: {restTaxDebt}\n🕒 Последняя смена: {lastActive}\n\n👨‍🍳 Кухня\n👨‍🍳 Количество поваров: {kitchenWorkload}\n👨‍🍳 Максимальное количество поваров: {kitchenWorkloadMax}\n\n🍽️ Зал\n👩‍🍳 Количество официантов: {loungeWorkload}\n👩‍🍳 Максимальное количество официантов: {loungeWorkloadMax}",
-        "us": "👤{fullname}\n🆔ID: <code>{user_id}</code>\n🌐 Language: {language}\n💰 Balance: {balance}\n\n🍽️ Restaurant \"{restName}\"\n💰 Income: {restIncome}\n📋 Tax debt: {restTaxDebt}\n🕒 Last active: {lastActive}\n\n👨‍🍳 Kitchen\n👨‍🍳 Chiefs count: {kitchenWorkload}\n👨‍🍳 Max chiefs: {kitchenWorkloadMax}\n\n🍽️ Lounge\n👩‍🍳 Servants count: {loungeWorkload}\n👩‍🍳 Max servants: {loungeWorkloadMax}"
+        "ru": "👤{fullname}\n🆔ID: <code>{user_id}</code>\n🌐 Язык: {language}\n💰 Баланс: {balance}\n\n🍽️ Ресторан \"{restName}\"\n💰 Доход: {restIncome}\n📋 Налоговая задолженность: {restTaxDebt}\n🕒 Последняя смена: {lastActive}\n\n👨‍🍳 Кухня\n👨‍🍳 Количество поваров: {kitchenWorkload}\n👨‍🍳 Максимальное количество поваров: {kitchenWorkloadMax}\n\n🍽️ Зал\n🍽️ Количество официантов: {loungeWorkload}\n🍽️ Максимальное количество официантов: {loungeWorkloadMax}\n\n/" + COMMANDS["human_info"]["us"] + " инфа о персонале",
+        "us": "👤{fullname}\n🆔ID: <code>{user_id}</code>\n🌐 Language: {language}\n💰 Balance: {balance}\n\n🍽️ Restaurant \"{restName}\"\n💰 Income: {restIncome}\n📋 Tax debt: {restTaxDebt}\n🕒 Last active: {lastActive}\n\n👨‍🍳 Kitchen\n👨‍🍳 Chiefs count: {kitchenWorkload}\n👨‍🍳 Max chiefs: {kitchenWorkloadMax}\n\n🍽️ Lounge\n🍽️ Servants count: {loungeWorkload}\n🍽️ Max servants: {loungeWorkloadMax}\n\n/" + COMMANDS["human_info"]["us"] + " employees data",
     },
     "reply_keyboard_removed": {
         "ru": "👌 Понял + принял",
@@ -330,6 +336,10 @@ PHRASES = {
     "transfer_received": {
         "ru": "🤑 Получен перевод от <code>{sender}</code>: {amount}$",
         "us": "🤑 Transfer received from <code>{sender}</code>: {amount}$"
+    },
+    "human_info": {
+        "ru": "👤 Информация о персонале:\n{employees}",
+        "us": "👤 Employees information: \n{employees}"
     },
 }
 

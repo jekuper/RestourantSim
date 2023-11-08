@@ -11,6 +11,7 @@ from datetime import datetime
 def register_handlers(dpG: Dispatcher):
     dpG.register_message_handler(process_profile, lambda msg: BotLocalization.check_command_localization("profile", msg, False) is not None, state=None)
     dpG.register_message_handler(process_transfer, lambda msg: BotLocalization.check_command_localization("transfer", msg, True) is not None, state=None)
+    dpG.register_message_handler(process_human_info, lambda msg: BotLocalization.check_command_localization("human_info", msg, True) is not None, state=None)
 
     if common.dp is None:
         common.dp = dpG
@@ -35,6 +36,22 @@ async def process_profile(message: types.Message, state: FSMContext):
                                                 loungeWorkloadMax=str(rest.lounge_workload_max),
                                                 lastActive=rest.last_active.strftime("%m/%d/%Y, %H:%M:%S"),
                                                 )
+    await message.reply(result)
+    
+#TODO: fix it
+async def process_human_info(message: types.Message, state: FSMContext):
+    result = ""
+    employees = BotDataBase.get_workers(message.from_id)
+    user_language = BotDataBase.get_user_language(message.from_id)
+    
+    employees = list(set(employees))
+    employees = BotDataBase.workers_to_string(employees)
+
+    if employees is None:
+        result = PHRASES["user_not_exist"][user_language]
+    else:
+        string = "\n".join([str(i[0]) + " x" + str(i[1]) for i in employees])
+        result = PHRASES["human_info"][user_language].format(employees)
     await message.reply(result)
 
 async def process_transfer(message: types.Message, state: FSMContext):
