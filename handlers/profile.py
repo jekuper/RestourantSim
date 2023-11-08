@@ -37,21 +37,26 @@ async def process_profile(message: types.Message, state: FSMContext):
                                                 lastActive=rest.last_active.strftime("%m/%d/%Y, %H:%M:%S"),
                                                 )
     await message.reply(result)
-    
+
 #TODO: fix it
 async def process_human_info(message: types.Message, state: FSMContext):
     result = ""
     employees = BotDataBase.get_workers(message.from_id)
     user_language = BotDataBase.get_user_language(message.from_id)
     
-    employees = list(set(employees))
-    employees = BotDataBase.workers_to_string(employees)
+    employeesOld = employees
+    employees = {}
+    for e in employeesOld:
+        if e not in employees:
+            employees[e] = 0
+        employees[e] += 1
+    employees = BotDataBase.workers_id_to_string(employees)
 
     if employees is None:
         result = PHRASES["user_not_exist"][user_language]
     else:
-        string = "\n".join([str(i[0]) + " x" + str(i[1]) for i in employees])
-        result = PHRASES["human_info"][user_language].format(employees)
+        string = "\n".join([str(key) + " x" + str(val) for key, val in employees.items()])
+        result = PHRASES["human_info"][user_language].format(employees=string)
     await message.reply(result)
 
 async def process_transfer(message: types.Message, state: FSMContext):

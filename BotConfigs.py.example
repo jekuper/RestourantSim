@@ -9,6 +9,9 @@ class BotStates(StatesGroup):
     FIRST_WORKER = State()
     COMPLETING_DEAL = State()
 
+
+COMMAND_LIMIT = 25
+
 ### data base
 
 HOSTNAME = "127.0.0.1"
