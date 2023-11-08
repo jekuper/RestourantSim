@@ -205,7 +205,6 @@ def workers_id_to_string(employees: list[int]) -> list[str]:
         return None
     print(result)
     for e in result:
-        e = json.loads(e)
         employees[e.name + " " + e.last_name] = employees[e.id]
         del employees[e.id]
     return employees
