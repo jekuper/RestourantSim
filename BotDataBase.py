@@ -203,8 +203,9 @@ def workers_id_to_string(employees: list[int]) -> list[str]:
     result = session.query(human_deal.id, human_deal.name, human_deal.last_name).filter(human_deal.id.in_(list(employees.keys()))).all()
     if result is None:
         return None
-    result = json.loads(result)
+    print(result)
     for e in result:
+        e = json.loads(e)
         employees[e.name + " " + e.last_name] = employees[e.id]
         del employees[e.id]
     return employees
