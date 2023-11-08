@@ -7,7 +7,7 @@ from common import ThrottlingMiddleware
 
 from handlers import greeting, store, profile, dayShift, taxCheck, brawlOrder, help, casino
 
-from BotConfigs import USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE_NAME, TOKEN
+from BotConfigs import USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE_NAME, TOKEN, COMMAND_LIMIT
 import BotDataBase
 
 
@@ -18,7 +18,7 @@ bot = Bot(token=TOKEN, parse_mode="HTML")
 storage = MemoryStorage()
 dispatcher = Dispatcher(bot, storage=storage)
 
-dispatcher.middleware.setup(ThrottlingMiddleware(5))
+dispatcher.middleware.setup(ThrottlingMiddleware(60 / COMMAND_LIMIT))
 
 greeting.register_handlers(dispatcher)
 store.register_handlers(dispatcher)
