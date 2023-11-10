@@ -82,13 +82,15 @@ async def process_crash(message: types.Message, state: FSMContext):
             return
         cost = int(args[0])
         kf = float(args[1])
-        if kf < 1 or kf > 20 or cost < 0:
+        if kf < 1.5 or kf > 10 or cost < 0:
             await message.reply(PHRASES["incorrect_command"][user_language].format(command=COMMANDS["crash"]["us"]))
             return
 
         if cost <= BotDataBase.get_balance(message.from_id):
             BotDataBase.change_balance(message.from_id, -cost)
-            newKf = min(BotDataBase.random_float(1, 10), BotDataBase.random_float(1, 10), BotDataBase.random_float(1, 10), BotDataBase.random_float(1, 10))
+            newKf = 1000
+            for _ in range(20):
+                newKf = min(newKf, BotDataBase.random_float(1, 10))
             if newKf > kf:
                 BotDataBase.change_balance(message.from_id, int(cost * kf))
                 await message.reply(PHRASES["crash_win"][user_language].format(cost=int(cost * kf), kf=newKf))
