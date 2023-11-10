@@ -282,8 +282,8 @@ PHRASES = {
         "us": "👊 Brawlers are hired and already in \"{name}\".\nIt will be a bad day for your opponent!\nLosses will be approximately at {cost}$"
     },
     "incorrect_command": {
-        "ru": "❓ Команда \"{command}\" введена неверно",
-        "us": "❓ Command \"{command}\", not enough arguments provided"
+        "ru": "❓ Команда \"{command}\" введена неверно\n/help {command} чтобы получить справку.",
+        "us": "❓ Command \"{command}\", not enough arguments provided\n/help {command} to get info."
     },
     "brawl_self": {
         "ru": "🤦‍♂️ Глупо заказывать драку в своем же ресторане!",
@@ -314,8 +314,8 @@ PHRASES = {
         "us": "😞 You lost\nYou lost {cost}$"
     },
     "crash_win": {
-        "ru": "🤑 Вы победили, коэффициент: {kf:.2f}\nВы получили {cost}$",
-        "us": "🤑 You won, coefficient: {kf:.2f}\nYou got {cost}$"
+        "ru": "🤑 Вы победили, коэффициент: {kf:.2f}\nВы получили {cost}$\nЧистая прибыль {profit}$",
+        "us": "🤑 You won, coefficient: {kf:.2f}\nYou got {cost}$\nProfit {profit}$"
     },
     "crash_lose": {
         "ru": "💥 Вы проиграли, коэффициент: {kf:.2f}\nВы потеряли {cost}$",
