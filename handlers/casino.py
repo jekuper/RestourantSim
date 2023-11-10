@@ -89,7 +89,7 @@ async def process_crash(message: types.Message, state: FSMContext):
         if cost <= BotDataBase.get_balance(message.from_id):
             BotDataBase.change_balance(message.from_id, -cost)
             newKf = 1000
-            for _ in range(12):
+            for _ in range(18):
                 newKf = min(newKf, BotDataBase.random_float(1, 10))
             if newKf > kf:
                 BotDataBase.change_balance(message.from_id, int(cost * kf))
